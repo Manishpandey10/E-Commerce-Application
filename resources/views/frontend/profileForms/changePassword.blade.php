@@ -61,25 +61,45 @@
 
     </div>
     @push('scripts')
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
         <script>
-            var toggler = document.querySelectorAll('.form-password-toggle i');
-            if (typeof toggler !== 'undefined' && toggler !== null) {
-                toggler.forEach(function(el) {
-                    el.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        var formPasswordToggle = el.closest('.form-password-toggle');
-                        var formPasswordToggleIcon = formPasswordToggle.querySelector('i');
-                        var formPasswordToggleInput = formPasswordToggle.querySelector('input');
-                        if (formPasswordToggleInput.getAttribute('type') === 'text') {
-                            formPasswordToggleInput.setAttribute('type', 'password');
-                            formPasswordToggleIcon.classList.replace('bx-show', 'bx-hide');
-                        } else if (formPasswordToggleInput.getAttribute('type') === 'password') {
-                            formPasswordToggleInput.setAttribute('type', 'text');
-                            formPasswordToggleIcon.classList.replace('bx-hide', 'bx-show');
-                        }
-                    });
-                });
-            }
+            $(document).ready(function(){
+               $('.form-password-toggle i').click(function(e){
+                e.preventDefault();
+                var formPasswordToggle = $(this).closest('.form-password-toggle');
+                var formPasswordToggleIcon = formPasswordToggle.find('i');
+                var formPasswordToggleInput = formPasswordToggle.find('input');
+                if (formPasswordToggleInput.attr('type')==='text'){
+                    formPasswordToggleInput.attr('type', 'password');
+                    formPasswordToggleIcon.removeClass('bx-show').addClass('bx-hide');
+                }
+                else if (formPasswordToggleInput.attr('type')==='password'){
+                     formPasswordToggleInput.attr('type', 'text');
+                    formPasswordToggleIcon.removeClass('bx-hide').addClass('bx-show');
+                }
+               });
+
+
+            });
+            // var toggler = document.querySelectorAll('.form-password-toggle i');
+            // if (typeof toggler !== 'undefined' && toggler !== null) {
+            //     toggler.forEach(function(el) {
+            //         el.addEventListener('click', function(e) {
+            //             e.preventDefault();
+            //             var formPasswordToggle = el.closest('.form-password-toggle');
+            //             var formPasswordToggleIcon = formPasswordToggle.querySelector('i');
+            //             var formPasswordToggleInput = formPasswordToggle.querySelector('input');
+            //             if (formPasswordToggleInput.getAttribute('type') === 'text') {
+            //                 formPasswordToggleInput.setAttribute('type', 'password');
+            //                 formPasswordToggleIcon.classList.replace('bx-show', 'bx-hide');
+            //             } else if (formPasswordToggleInput.getAttribute('type') === 'password') {
+            //                 formPasswordToggleInput.setAttribute('type', 'text');
+            //                 formPasswordToggleIcon.classList.replace('bx-hide', 'bx-show');
+            //             }
+            //         });
+            //     });
+            // }
         </script>
     @endpush
 @endsection

@@ -140,3 +140,9 @@
         {{ session('ThemeSucess') }}
     </div>
 @endif
+{{-- Jquery js script tag output  --}}
+@if (session('BtnClick'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{ session('BtnClick') }}
+    </div>
+@endif
