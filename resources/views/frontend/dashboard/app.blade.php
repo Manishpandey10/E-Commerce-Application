@@ -12,7 +12,8 @@
                                     Dashboard, <strong>{{ Auth::user()->username }}</strong></h3>
                                 <h3 class="mb-0 h4 font-weight-bolder">Email Id : <strong>{{ Auth::user()->email }}</strong>
                                 </h3>
-                                <button id="button" class="btn btn-info btn-sm">simple toggle button</button>
+                                <button id="button" class="btn btn-info btn-sm">Animation button</button>
+                                <button id="stop" class="btn btn-info btn-sm">Stop animation button</button>
                                 <p id="p1" class="mb-4 mt-4">
                                     Check the sales, value and bounce rate by country.
                                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi dolorum soluta maxime non
@@ -34,9 +35,7 @@
                                     aspernatur provident voluptatem enim, natus doloremque quidem accusantium?
                                 </p>
                                 <p id='p5' class="mb-4">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur inventore possimus
-                                    tempore id quis veritatis esse doloribus quisquam, ut alias, architecto blanditiis
-                                    aspernatur provident voluptatem enim, natus doloremque quidem accusantium?
+                                    Double click to toggle class in this paragraph. inspect element to see effects
                                 </p>
 
                             </div>
@@ -50,33 +49,48 @@
                         <script>
                             $(document).ready(function() {
                                 // $('p').css('color','green');
-                                $('#button').click(function(){
+                                $('#button').click(function() {
+                                    $('p')
+                                    .animate(
+                                        {
+                                        height: 'toggle'
+                                        },
+                                     3000)
+                                    .css('color', 'green')
+                                    
                                     // $('p').fadeToggle(2000, function(){
-                                    $('p').slideToggle(800, function(){
-
-                                        console.log("button has been clicked!");
-                                    });
+                                    // $('p').slideToggle(800, function(){
+                                    //     $('p').css('color','blue');
+                                    // });
                                     // $('p').css('color','red');
                                     // setTimeout(function(){
                                     //     $('p').css('color','blue')
                                     // },3000);
-                             });
-                            
-                            // $('#p3').mouseover(function()
-                            // {
-                            //     $(this).css('color','cyan')
-                            // }).mouseleave(function(){
-                            //     $(this).css('color','black');
-                            // });
-                            // });
-                            $("#p4").dblclick(function(){
-                                alert('text: '+$("#p4").text('Number 4 paragraph'));
-                            });
-                            $('#p5').dblclick(function(){
-                                $('#p5').toggleClass("paragraph");
-                            });
+                                });
+                                $('#stop').click(function() {
+                                    $('p').stop()
+                                    setTimeout(function(){
+                                        $('p').css('color','red')
+                                    },'fast');
+                                });
 
-                            }); 
+                                // $('#p3').mouseover(function()
+                                // {
+                                //     $(this).css('color','cyan')
+                                // }).mouseleave(function(){
+                                //     $(this).css('color','black');
+                                // });
+                                // });
+                                $("#p4").dblclick(function() {
+                                    $("#p4").text('Number 4 paragraph');
+                                });
+                                $('#p5').dblclick(function() {
+                                    $('#p5').toggleClass("paragraph");
+                                });
+                                $('#p5').after('<p>paragrah inserted here is appended using after function !!!!</p>');
+                                $('#p1').after('<p>paragrah inserted here is appended using before function !!!!</p>');
+
+                            });
                         </script>
                     @endpush
                 @endsection
