@@ -19,7 +19,7 @@ class UpdateProfileController extends Controller
         $request->validate([
             'username'=>'required',
             'email'=>'required|email|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/',
-            "phone" => 'required|regex:^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$',
+            "phone" => 'required',
             "profileimage" => 'nullable|image|mimes:jpg,jpeg,png'
         ],[
             'username.required'=>'Full Name field is Required',
@@ -40,7 +40,8 @@ class UpdateProfileController extends Controller
             $updateuser->profileimage = $request->file('profileimage')->store('profileimage','public');
         }
         $updateuser->save();
-        return redirect()->back()->with("updateMsg","User profile details updated succesfully")->withInput();
+        return response()->json(['status'=>'success', "updateMsg"=>"User profile details updated succesfully"]);
+        // return redirect()->back()->with("updateMsg","User profile details updated succesfully")->withInput();
 
     }
 }

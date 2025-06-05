@@ -72,7 +72,7 @@
                 var formPasswordToggleInput = formPasswordToggle.find('input');
                 if (formPasswordToggleInput.attr('type')==='text'){
                     formPasswordToggleInput.attr('type', 'password');
-                    formPasswordToggleIcon.removeClass('bx-show').addClass('bx-hide');
+                    formPasswordToggleIcon.removeClass('bx-show','bx-hide').addClass('bx-hide');
                 }
                 else if (formPasswordToggleInput.attr('type')==='password'){
                      formPasswordToggleInput.attr('type', 'text');

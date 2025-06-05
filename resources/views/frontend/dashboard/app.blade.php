@@ -14,6 +14,7 @@
                                 </h3>
                                 <button id="button" class="btn btn-info btn-sm">Animation button</button>
                                 <button id="stop" class="btn btn-info btn-sm">Stop animation button</button>
+                                <button id="fetchbtn" class="btn btn-info btn-sm">Fetch dummy api</button>
                                 <p id="p1" class="mb-4 mt-4">
                                     Check the sales, value and bounce rate by country.
                                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi dolorum soluta maxime non
@@ -37,6 +38,9 @@
                                 <p id='p5' class="mb-4">
                                     Double click to toggle class in this paragraph. inspect element to see effects
                                 </p>
+                                <div class="sample">
+                                    simple div 
+                                </div>
 
                             </div>
 
@@ -51,13 +55,12 @@
                                 // $('p').css('color','green');
                                 $('#button').click(function() {
                                     $('p')
-                                    .animate(
-                                        {
-                                        height: 'toggle'
-                                        },
-                                     3000)
-                                    .css('color', 'green')
-                                    
+                                        .animate({
+                                                height: 'toggle'
+                                            },
+                                            1500)
+                                        .css('color', 'green')
+
                                     // $('p').fadeToggle(2000, function(){
                                     // $('p').slideToggle(800, function(){
                                     //     $('p').css('color','blue');
@@ -69,27 +72,35 @@
                                 });
                                 $('#stop').click(function() {
                                     $('p').stop()
-                                    setTimeout(function(){
-                                        $('p').css('color','red')
-                                    },'fast');
+                                    setTimeout(function() {
+                                        $('p').css('color', 'red')
+                                    }, 'fast');
                                 });
 
-                                // $('#p3').mouseover(function()
-                                // {
-                                //     $(this).css('color','cyan')
-                                // }).mouseleave(function(){
-                                //     $(this).css('color','black');
-                                // });
-                                // });
-                                $("#p4").dblclick(function() {
-                                    $("#p4").text('Number 4 paragraph');
+                                $('#p3').mouseover(function() {
+                                    $(this).css('color', 'cyan')
+                                }).mouseleave(function() {
+                                    $(this).css('color', 'black');
                                 });
-                                $('#p5').dblclick(function() {
-                                    $('#p5').toggleClass("paragraph");
-                                });
-                                $('#p5').after('<p>paragrah inserted here is appended using after function !!!!</p>');
-                                $('#p1').after('<p>paragrah inserted here is appended using before function !!!!</p>');
+                            
+                            $("#p4").dblclick(function() {
+                                $("#p4").text('Number 4 paragraph');
+                            });
+                            $('#p5').dblclick(function() {
+                                $('#p5').toggleClass("paragraph");
+                            });
+                            $('#p5').after('<p>paragrah inserted here is appended using after function !!!!</p>');
+                            $('#p1').after('<p>paragrah inserted here is appended using before function !!!!</p>');
 
+                            $("#fetchbtn").click(function(){
+                                $.ajax({
+                                    url:'https://baconipsum.com/api/?type=all-meat&paras=3&start-with-lorem=1&format=html',
+                                    method:'GET',
+                                    success:function(data){
+                                        $('.sample').html(data);
+                                    }
+                                });
+                            });
                             });
                         </script>
                     @endpush
