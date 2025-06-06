@@ -60,7 +60,13 @@ class AddNewProductController extends Controller
         //    dd($newProduct);
         $newProduct->save();
         $page = Productdata::paginate(15);
-        
-        return redirect()->route('product.list', ['page' => $page])->with('newProductAdded', 'New Product added.');
+
+        return response()->json([
+            'status'=>'success',
+            'newProductAdded'=>'New Product added.'
+            
+        ]);
+
+        // return redirect()->route('product.list', ['page' => $page])->with('newProductAdded', 'New Product added.');
     }
 }

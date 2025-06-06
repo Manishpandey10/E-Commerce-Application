@@ -14,15 +14,14 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formAuthentication" class="mb-6" method="POST" action="{{ route('addProduct.submit') }}"
-                        enctype="multipart/form-data">
+                    <form id="updateForm" class="mb-6" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-6 mb-4">
                                 <label for="username" class="form-label">Enter Product Name</label>
                                 <input type="text" class="form-control" id="username" name="productname"
-                                    placeholder="Enter name of category" autofocus value="{{ old('productname') }}" />
-                                <span class="text-danger">
+                                    placeholder="Enter name of Product" autofocus value="{{ old('productname') }}" />
+                                <span id="productname" class="text-danger">
                                     @error('productname')
                                         {{ $message }}
                                     @enderror
@@ -39,7 +38,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">
+                                <span id="productCategory" class="text-danger">
                                     @error('productCategory')
                                         {{ $message }}
                                     @enderror
@@ -54,7 +53,7 @@
                                         rows="3" value="{{ old('productDescription') }}"></input>
                                     <span class="input-group-text cursor-pointer"></span>
                                 </div>
-                                <span class="text-danger">
+                                <span id="productDescription" class="text-danger">
                                     @error('productDescription')
                                         {{ $message }}
                                     @enderror
@@ -68,7 +67,7 @@
                                 <small id="emailHelp" class="form-text text-muted">Supported file formats = .JPG,.PNG,
                                     .JPEG</small>
                                 <br>
-                                <span class="text-danger">
+                                <span id="thumbnail" class="text-danger">
                                     @error('thumbnail')
                                         {{ $message }}
                                     @enderror
@@ -113,7 +112,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">
+                                <span id="color" class="text-danger">
                                     @error('color')
                                         {{ $message }}
                                     @enderror
@@ -130,13 +129,13 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">
+                                <span id="theme" class="text-danger">
                                     @error('theme')
                                         {{ $message }}
                                     @enderror
                                 </span>
                             </div>
-                             <div class="col-12 mb-4">
+                            <div class="col-12 mb-4">
                                 <label for="category" class="form-label">Status</label>
                                 <select class="form-select" aria-label="Default select example" name="productStatus">
                                     <option selected>Status </option>
@@ -146,7 +145,7 @@
                                         Listed
                                     </option>
                                 </select>
-                                <span class="text-danger">
+                                <span id="productStatus" class="text-danger">
                                     @error('productStatus')
                                         {{ $message }}
                                     @enderror
@@ -162,5 +161,63 @@
 
                     </form>
 
-                </div>
-            @endsection
+    </div>
+@push('scripts')
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $('#updateForm').on('submit',function(e){
+                    e.preventDefault();
+                    let formData = new FormData(this);
+                    $.ajax({
+                        url:"{{ route('addProduct.submit') }}",
+                        method: "POST",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success:function(res){
+                            if(res.status === 'success'){
+                                console.log(res);
+                                window.location.href = "{{ route('product.list') }}"
+                            }
+                        },
+                        error:function(error){
+                            console.log(error);
+                        
+
+                        const formError = error.responseJSON.errors;
+                        $('.text-danger').html('');
+
+                        if( formError.productname ){
+                            $("#productname").html(formError.productname[0]);
+                        }
+                        if( formError.productCategory ){
+                            $('#productCategory').html(formError.productCategory[0]);
+                        }
+                        if( formError.productDescription ){
+                            $('#productDescription').html(formError.productDescription[0]);
+                        }
+                        if( formError.thumbnail ){
+                            $('#thumbnail').html(formError.thumbnail[0]);
+                        }
+                        if( formError.color ){
+                            $('#color').html(formError.color[0]);
+                        }
+                        if( formError.theme ){
+                            $("#theme").html(formError.theme[0]);
+                        }
+                        if( formError.productStatus ){
+                            $("#productStatus").html(formError.productStatus[0]);
+                        }
+                        }
+                    });
+                });
+                });
+            </script>
+@endpush
+@endsection
