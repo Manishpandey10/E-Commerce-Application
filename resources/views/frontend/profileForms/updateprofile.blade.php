@@ -57,11 +57,14 @@
                             </span>
                         </div>
 
-                        <div>
+                        <div> 
 
                             <button type="submit" class="btn btn-primary">Update Profile</button>
                             <a class="mx-6" id="changePass" href="">
                                 <span>Change password </span>
+                            </a>
+                            <a class="mx-6" id="changePass" href="{{ route('dashboard') }}">
+                                <span>Go to Dashboard </span>
                             </a>
                         </div>
                     </form>
@@ -115,14 +118,14 @@
                                                 const formError = error.responseJSON.errors;
                                                 console.log(formError);
                                                 $('.text-danger').html('');
-                                                if ($('#username_error')) {
+                                                if ( formError.username ) {
                                                     $('#username_error').html(formError.username[0]);
                                                 }
-                                                if ($('#email_error')) {
+                                                if ( formError.email ) {
                                                     $('#email_error').html(formError.email[0]);
 
                                                 }
-                                                if ($('#phone_error')) {
+                                                if ( formError.phone ) {
                                                     $('#phone_error').html(formError.phone[0]);
                                                 }
                                             }

@@ -129,18 +129,18 @@
                                 console.log(error);
                                 let formError = error.responseJSON.errors;
                                 $('.text-danger').html('');
-                                if( $('#categoryname') ){
+                                if( formError.categoryname ){
                                     $('#categoryname').html(formError.categoryname[0])
                                 }
-                                if($('#productDescription')){
+                                if( formError.productDescription ){
                                     $('#productDescription').html(formError.productDescription[0]);
                                 }
 
-                                if($('#thumbnail')){
+                                if( formError.thumbnail ){
                                     $('#thumbnail').html(formError.thumbnail[0]);
                                 }
 
-                                if($('#productStatus')){
+                                if( formError.productStatus ){
                                     $('#productStatus').html(formError.productStatus[0]);
                                 }
                             }

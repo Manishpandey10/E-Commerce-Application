@@ -126,27 +126,22 @@
                           
                             $('.text-danger').html('');
 
-                            if (error.responseJSON?.message) {
-                                $('#alert_msg').html(
-                                    `<div class="alert alert-danger alert-dismissible" role="alert">${error.responseJSON.message}</div>`
-                                );
-                                return;
-                            }
+                            // 
 
                             const formError = error.responseJSON.errors;
                             console.log(formError);
 
                             $('.text-danger').html('');
-                            if ($('#curr_pass')) {
+                            if ( formError.cur_password ) {
                                 $('#curr_pass').html(formError.cur_password[0]);
                             }
-                            if ($('#new_pass')) {
+                            if ( formError.new_password ) {
                                 $('#new_pass').html(formError.new_password[0]);
                             }
-                            if ($('#confirm_pass')) {
+                            if ( formError.password_confirmation ) {
                                 $('#confirm_pass').html(formError.password_confirmation[0]);
                             }
-
+ 
                         }
 
                     });
