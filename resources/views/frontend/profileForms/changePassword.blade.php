@@ -3,7 +3,7 @@
     <div class="row mb-6 mt-6 gy-6 justify-content-center">
         <div class="col-6">
             <div class="card">
-                <span class="text-danger mt-4 mx-4 ">
+                <span id="alert_msg" class="text-danger mt-4 mx-4 ">
                     @include('components.global-message')
                 </span>
 
@@ -11,7 +11,7 @@
                     <h5 class="mb-0">Update Your Password</h5>
                 </div>
                 <div class="card-body">
-                    <form id="formAuthentication" action="{{ route('updated-password') }}" class="mb-6" method="POST">
+                    <form id="updateForm" class="mb-6">
                         @csrf
                         <div class="mb-6 form-password-toggle">
                             <label class="form-label" id="cur_password" for="password">Current Password</label>
@@ -19,7 +19,7 @@
                                 <input type="password" id="password" class="form-control" name="cur_password" />
                                 <span class="input-group-text cursor-pointer"><i class="icon-base bx bx-hide"></i></span>
                             </div>
-                            <span class="text-danger">
+                            <span id="curr_pass" class="text-danger">
                                 @error('cur_password')
                                     {{ $message }}
                                 @enderror
@@ -32,7 +32,7 @@
                                     aria-describedby="basic-default-email2" name="new_password" />
                                 <br>
                             </div>
-                            <span class="text-danger">
+                            <span id="new_pass" class="text-danger">
                                 @error('new_password')
                                     {{ $message }}
                                 @enderror
@@ -42,11 +42,12 @@
                             <label class="form-label form-password-toggle" for="basic-default-phone">Confirm New
                                 Password</label>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="basic-default-phone" class="form-control phone-mask" name="password_confirmation" />
+                                <input type="password" id="basic-default-phone" class="form-control phone-mask"
+                                    name="password_confirmation" />
                                 <span class="input-group-text cursor-pointer"><i class="icon-base bx bx-hide"></i></span>
                             </div>
 
-                            <span class="text-danger">
+                            <span id="confirm_pass" class="text-danger">
                                 @error('password_confirmation')
                                     {{ $message }}
                                 @enderror
@@ -61,27 +62,81 @@
 
     </div>
     @push('scripts')
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
         <script>
-            $(document).ready(function(){
-               $('.form-password-toggle i').click(function(e){
-                e.preventDefault();
-                var formPasswordToggle = $(this).closest('.form-password-toggle');
-                var formPasswordToggleIcon = formPasswordToggle.find('i');
-                var formPasswordToggleInput = formPasswordToggle.find('input');
-                if (formPasswordToggleInput.attr('type')==='text'){
-                    formPasswordToggleInput.attr('type', 'password');
-                    formPasswordToggleIcon.removeClass('bx-show','bx-hide').addClass('bx-hide');
-                }
-                else if (formPasswordToggleInput.attr('type')==='password'){
-                     formPasswordToggleInput.attr('type', 'text');
-                    formPasswordToggleIcon.removeClass('bx-hide').addClass('bx-show');
-                }
-               });
+            $(document).ready(function() {
+                $('.form-password-toggle i').click(function(e) {
+                    e.preventDefault();
+                    var formPasswordToggle = $(this).closest('.form-password-toggle');
+                    var formPasswordToggleIcon = formPasswordToggle.find('i');
+                    var formPasswordToggleInput = formPasswordToggle.find('input');
+                    if (formPasswordToggleInput.attr('type') === 'text') {
+                        formPasswordToggleInput.attr('type', 'password');
+                        formPasswordToggleIcon.removeClass('bx-show', 'bx-hide').addClass('bx-hide');
+                    } else if (formPasswordToggleInput.attr('type') === 'password') {
+                        formPasswordToggleInput.attr('type', 'text');
+                        formPasswordToggleIcon.removeClass('bx-hide').addClass('bx-show');
+                    }
+                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $('#updateForm').on('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    $.ajax({
+                        url: "{{ route('updated-password') }}",
+                        method: "POST",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(res) {
+                            if (res.status === 'success') {
+                                // console.log(res);
+                                let alert_msg = res.changepasswordSuccess;
+                                console.log(alert_msg);
+                                $('#alert_msg').html(
+                                    `<div class="alert alert-success alert-dismissible" role="alert">${alert_msg} </div>`
+                                );
+                                setTimeout(function(){
+                                    $('#alert_msg').html('');
+                                    window.location.href = "http://127.0.0.1:8000/admin/change-password";
+                                },1500);
+                            }
+
+                        },
+                        error: function(error) {
+                            console.log(error);
+                            const formError = error.responseJSON.errors;
+                            console.log(formError);
+                            $('.text-danger').html('');
+                            if ($('#curr_pass')) {
+                                $('#curr_pass').html(formError.cur_password[0]);
+                            }
+                            if ($('#new_pass')) {
+                                $('#new_pass').html(formError.new_password[0]);
+                            }
+                            if ($('#confirm_pass')) {
+                                $('#confirm_pass').html(formError.password_confirmation[0]);
+                            }
+
+                        }
+
+                    });
+                });
+
 
 
             });
+
+
+
+
+
+
             // var toggler = document.querySelectorAll('.form-password-toggle i');
             // if (typeof toggler !== 'undefined' && toggler !== null) {
             //     toggler.forEach(function(el) {
