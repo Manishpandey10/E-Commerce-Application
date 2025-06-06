@@ -4,7 +4,7 @@
         <div class="col-6">
             <div class="card">
                 <span id="alert_msg" class="text-danger mt-4 mx-4 ">
-                    @include('components.global-message')
+                    {{-- @include('components.global-message') --}}
                 </span>
 
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -86,6 +86,7 @@
                 });
                 $('#updateForm').on('submit', function(e) {
                     e.preventDefault();
+                    // console.log("form submitted!");
                     const formData = new FormData(this);
                     $.ajax({
                         url: "{{ route('updated-password') }}",
@@ -101,17 +102,40 @@
                                 $('#alert_msg').html(
                                     `<div class="alert alert-success alert-dismissible" role="alert">${alert_msg} </div>`
                                 );
-                                setTimeout(function(){
+                                setTimeout(function() {
                                     $('#alert_msg').html('');
-                                    window.location.href = "http://127.0.0.1:8000/admin/change-password";
-                                },1500);
+                                    window.location.href =
+                                        "http://127.0.0.1:8000/admin/change-password";
+                                }, 1500);
+                            }
+                            if(res.status === 'error'){
+                                let alert_msg = res.changePasswordError;
+                                $('#alert_msg').html(
+                                    `<div class="alert alert-danger alert-dismissible" role="alert">${alert_msg} </div>`
+                                );
+                                setTimeout(function() {
+                                    $('#alert_msg').html('');
+                                    window.location.href =
+                                        "http://127.0.0.1:8000/admin/change-password";
+                                }, 3000);
                             }
 
                         },
                         error: function(error) {
                             console.log(error);
+                          
+                            $('.text-danger').html('');
+
+                            if (error.responseJSON?.message) {
+                                $('#alert_msg').html(
+                                    `<div class="alert alert-danger alert-dismissible" role="alert">${error.responseJSON.message}</div>`
+                                );
+                                return;
+                            }
+
                             const formError = error.responseJSON.errors;
                             console.log(formError);
+
                             $('.text-danger').html('');
                             if ($('#curr_pass')) {
                                 $('#curr_pass').html(formError.cur_password[0]);

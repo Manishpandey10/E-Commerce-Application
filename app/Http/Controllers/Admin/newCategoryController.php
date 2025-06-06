@@ -40,6 +40,13 @@ class newCategoryController extends Controller
         $newcategory->save();
         $page = ProductCategory::paginate(15);
         
-        return redirect()->route('manage.product',['page'=>$page])->with('productAdded','New Product category has been created!!');
+        return response()->json(
+            [
+                "status"=>"success",
+                'productAdded'=>'New Product category has been created!!'
+            ]
+        );
+
+        // return redirect()->route('manage.product',['page'=>$page])->with('productAdded','New Product category has been created!!');
     }
 }
