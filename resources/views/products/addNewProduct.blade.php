@@ -157,8 +157,6 @@
 
                             </div>
 
-
-
                     </form>
 
     </div>
@@ -183,6 +181,7 @@
                         success:function(res){
                             if(res.status === 'success'){
                                 console.log(res);
+                                sessionStorage.setItem('newProductAdded', res.newProductAdded)
                                 window.location.href = "{{ route('product.list') }}"
                             }
                         },

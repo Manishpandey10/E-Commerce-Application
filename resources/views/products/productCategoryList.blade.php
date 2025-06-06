@@ -2,10 +2,10 @@
 @section('main-container')
     <!-- Bordered Table -->
     <div class="card mx-4 mt-6">
-        <span class="text-success mt-6 mb-4 ">
-            <x-global-message />
-            <h5 class="card-header">Manage Product Category </h5>
+        <span id="alert_msg" class="text-success mt-6 mb-4 ">
+
         </span>
+        <h5 class="card-header">Manage Product Category </h5>
         <div class="mx-6">
             <button type="button" class=" btn btn-light " id="edit" name="edit"><a href="{{ route('addnewcategory') }}"
                     class="link-primary">Add new Product category</a></button>
@@ -59,4 +59,18 @@
         </div>
     </div>
     <!--/ Bordered Table -->
+    @push('scripts')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                const value = sessionStorage.getItem('productAdded');
+                $("#alert_msg").html(`<div class="alert alert-success alert-dismissible" role="alert">${value} </div>`);
+                sessionStorage.removeItem('productAdded');
+                setTimeout(function(){
+                    $("#alert_msg").hide();
+                },2000);
+
+            });
+        </script>
+    @endpush
 @endsection

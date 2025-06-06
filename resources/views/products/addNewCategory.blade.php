@@ -121,6 +121,7 @@
                             success:function(res){
                                 if(res.status === 'success'){
                                     console.log(res);
+                                    sessionStorage.setItem('productAdded',res.productAdded);
                                     window.location.href = "{{ route('manage.product') }}";
                                 }
                             },

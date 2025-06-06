@@ -3,7 +3,7 @@
     <!-- Bordered Table -->
     <div class="card mx-4 mt-6">
         <div>
-            <span class="mx-6 mb-2 text-success">
+            <span id="alert_msg" class="mx-6 mb-2 text-success">
                 @include('components.global-message')
             </span>
             <h5 class="card-header">Manage Products Listed </h5>
@@ -98,4 +98,16 @@
         </div>
     </div>
     <!--/ Bordered Table -->
+@push('scripts')
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script>
+              $(document).ready(function(){
+                const value = sessionStorage.getItem('newProductAdded');
+                $("#alert_msg").html(`<div class="alert alert-success alert-dismissible" role="alert">${value} </div>`);
+                 setTimeout(function(){
+                    $("#alert_msg").hide();
+                },2000);
+              });
+            </script>
+@endpush
 @endsection
