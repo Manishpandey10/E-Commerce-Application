@@ -63,8 +63,7 @@ class AddNewProductController extends Controller
 
         return response()->json([
             'status'=>'success',
-            'newProductAdded'=>'New Product added.',            
-        ]);
+        ])->with('newProductAdded', 'New Product added.');
 
         // return redirect()->route('product.list', ['page' => $page])->with('newProductAdded', 'New Product added.');
     }

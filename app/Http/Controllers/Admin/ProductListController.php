@@ -24,7 +24,13 @@ class ProductListController extends Controller
         // dd($data);// checking the data is fetched or not 
         if ($data)
             $data->delete();
-        return redirect()->back()->with('deleted', 'The product has been deleted!.');
+
+        return response()->json([
+            "status"=>"success",
+            'deleted'=> 'The product has been deleted!.'    
+
+        ]);
+        // return redirect()->back()->with( 'deleted', 'The product has been deleted!.' );
     }
     public function editpage($id)
     {
@@ -34,6 +40,13 @@ class ProductListController extends Controller
         $category = ProductCategory::get();
         // dd($editproduct);
         // dd($productdata);
+    //     return response()->json([
+    //     'status' => 'success',
+    //     'productdata' => $productdata,
+    //     'colors' => $colors,
+    //     'theme' => $theme,
+    //     'category' => $category,
+    // ]);
         return view('products.editProduct', compact('productdata', 'colors','theme','category'));
     }
     public function updateproduct(Request $request, $id)
@@ -79,6 +92,10 @@ class ProductListController extends Controller
         //saving the data
         $updatedata->save();
         $page = Productdata::paginate(15);
-        return redirect()->route('product.list', ['page' => $page])->with('productupdated', "product details has been updated successfully!");
+        return response()->json([
+            "status"=>"success",
+            'productupdated'=>"product details has been updated successfully!"
+        ]);
+        // return redirect()->route('product.list', ['page' => $page])->with('productupdated', "product details has been updated successfully!");
     }
 }

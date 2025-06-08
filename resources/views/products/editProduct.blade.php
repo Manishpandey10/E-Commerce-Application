@@ -13,15 +13,14 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formAuthentication" class="mb-6" method="POST"
-                        action="{{ route('update.product.list', $productdata->id) }}" enctype="multipart/form-data">
+                    <form id="updateForm" class="mb-6" data-id= "{{ $productdata->id }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-6 mb-4">
                                 <label for="username" class="form-label">Enter Product Name</label>
                                 <input type="text" class="form-control" id="username" name="productname"
                                     placeholder="Enter name of product" autofocus value="{{ $productdata->productname }}" />
-                                <span class="text-danger">
+                                <span id="productname" class="text-danger">
                                     @error('productname')
                                         {{ $message }}
                                     @enderror
@@ -38,7 +37,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">
+                                <span id="productCategory" class="text-danger">
                                     @error('productCategory')
                                         {{ $message }}
                                     @enderror
@@ -52,7 +51,7 @@
                                         rows="3" value="{{ $productdata->productDescription }}"></input>
                                     <span class="input-group-text cursor-pointer"></span>
                                 </div>
-                                <span class="text-danger">
+                                <span id="productDescription" class="text-danger">
                                     @error('productDescription')
                                         {{ $message }}
                                     @enderror
@@ -65,7 +64,7 @@
                                     id="basic-default-message" class="form-control"></input>
                                 <small id="emailHelp" class="form-text text-muted">Supported file formats = .JPG,.PNG,
                                     .JPEG</small>
-                                <span class="text-danger">
+                                <span id="productthumbnail" class="text-danger">
                                     @error('productthumbnail')
                                         {{ $message }}
                                     @enderror
@@ -74,7 +73,8 @@
                             <div class=" col-6 mb-4">
                                 <label for="metatitle" class="form-label">Meta title</label>
                                 <input type="text" class="form-control" id="metatitle"
-                                    value="{{ $productdata->metaTitle }}" name="metaTitle" placeholder="Enter meta title" />
+                                    value="{{ $productdata->metaTitle }}" name="metaTitle"
+                                    placeholder="Enter meta title" />
                                 <span class="text-danger">
                                     @error('metaTitle')
                                         {{ $message }}
@@ -98,8 +98,8 @@
 
 
                             </div>
-                            
-                              <div class="col-6 mb-4">
+
+                            <div class="col-6 mb-4">
                                 <label for="category" class="form-label">Color</label>
                                 <select class="form-select" aria-label="Default select example" name="color">
                                     <option value="" selected>Select Color</option>
@@ -110,13 +110,13 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">
+                                <span id="color" class="text-danger">
                                     @error('color')
                                         {{ $message }}
                                     @enderror
                                 </span>
                             </div>
-                              <div class="col-6 mb-4">
+                            <div class="col-6 mb-4">
                                 <label for="category" class="form-label">Theme</label>
                                 <select class="form-select" aria-label="Default select example" name="theme">
                                     <option value="" selected>Select Theme</option>
@@ -127,7 +127,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <span class="text-danger">
+                                <span id="theme" class="text-danger">
                                     @error('theme')
                                         {{ $message }}
                                     @enderror
@@ -144,7 +144,7 @@
                                         Unlisted</option>
                                 </select>
 
-                                <span class="text-danger">
+                                <span id="productStatus" class="text-danger">
                                     @error('productStatus')
                                         {{ $message }}
                                     @enderror
@@ -159,5 +159,62 @@
 
                     </form>
 
-    </div>
- @endsection
+                </div>
+                @push('scripts')
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $('#updateForm').on('submit', function(e) {
+                                e.preventDefault();
+                                let productId = $(this).data('id');
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                let formData = new FormData(this);
+                                $.ajax({
+                                    url: '{{ url('admin/product-list/edit') }}/' + productId,
+                                    method: "POST",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(res) {
+                                        if (res.status === 'success') {
+                                            console.log(res);
+                                            window.location.href = "{{ route('product.list') }}"
+                                        }
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        let formError = error.responseJSON.errors;
+                                        $('.text-danger').html('');
+                                        if (formError.productname) {
+                                            $('#productname').html(formError.productname[0]);
+                                        }
+                                        if (formError.productCategory) {
+                                            $('#productCategory').html(formError.productCategory[0]);
+                                        }
+                                        if (formError.productDescription) {
+                                            $('#productDescription').html(formError.productDescription[0]);
+                                        }
+                                        if (formError.color) {
+                                            $('#color').html(formError.color[0]);
+                                        }
+                                        if (formError.theme) {
+                                            $('#theme').html(formError.theme[0]);
+                                        }
+                                        if (formError.productStatus) {
+                                            $('#productStatus').html(formError.productStatus[0]);
+                                        }
+                                        
+                                    }
+
+                                });
+                            });
+
+
+                        });
+                    </script>
+                @endpush
+            @endsection

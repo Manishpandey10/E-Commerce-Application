@@ -36,15 +36,15 @@
                                 <td>{{ $data->id }}</td>
                                 <td>{{ $data->productname }}</td>
                                 @if ($data->color->status == 0)
-                                  <td>
-                                    <span class="text-danger">{{ $data->color->name }}</span>
-                                  </td>
+                                    <td>
+                                        <span class="text-danger">{{ $data->color->name }}</span>
+                                    </td>
                                 @else
-                                  <td>
-                                    <span class="text-success">{{ $data->color->name }}</span>
-                                  </td>
+                                    <td>
+                                        <span class="text-success">{{ $data->color->name }}</span>
+                                    </td>
                                 @endif
-                            
+
                                 <td>{{ $data->productDescription }}</td>
                                 {{-- product thumbnail --}}
                                 <td><img src="{{ url('storage/' . $data->productthumbnail) }}" width="50px"
@@ -52,23 +52,23 @@
                                 </td>
 
                                 @if ($data->theme->status == 0)
-                                  <td>
-                                    <span class="text-danger">{{ $data->theme->name }}</span>
-                                  </td>
+                                    <td>
+                                        <span class="text-danger">{{ $data->theme->name }}</span>
+                                    </td>
                                 @else
-                                  <td>
-                                    <span class="text-success">{{ $data->theme->name }}</span>
-                                  </td>
+                                    <td>
+                                        <span class="text-success">{{ $data->theme->name }}</span>
+                                    </td>
                                 @endif
                                 {{-- theme table data ends here --}}
                                 @if ($data->category->productStatus == 0)
-                                  <td>
-                                    <span class="text-danger">{{ $data->category->categoryname }}</span>
-                                  </td>
+                                    <td>
+                                        <span class="text-danger">{{ $data->category->categoryname }}</span>
+                                    </td>
                                 @else
-                                  <td>
-                                    <span class="text-success">{{ $data->category->categoryname }}</span>
-                                  </td>
+                                    <td>
+                                        <span class="text-success">{{ $data->category->categoryname }}</span>
+                                    </td>
                                 @endif
                                 <td>{{ $data->created_at }}</td>
 
@@ -82,13 +82,9 @@
                                     </td>
                                 @endif
 
-                                <td><button type="button" class=" btn btn-light " id="edit" name="edit "><a
-                                            href="{{ route('product.list.edit', $data->id) }}"
-                                            class="link-primary">Edit</a></button>&nbsp;&nbsp;
-                                    <button type="button" class=" btn btn-light " id="delete" name="delete"
-                                        onclick="return confirm('are your sure you want to delete this product ?')"><a
-                                            class="link-primary"
-                                            href="{{ route('product.list.delete', $data->id) }}">Delete</a></button>
+                                <td><button type="button" class=" btn btn-primary edit-btn" data-id="{{ $data->id }}" name="edit ">Edit</button>&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-primary dlt-btn"
+                                        data-id="{{ $data->id }}">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -98,16 +94,69 @@
         </div>
     </div>
     <!--/ Bordered Table -->
-@push('scripts')
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-            <script>
-              $(document).ready(function(){
-                const value = sessionStorage.getItem('newProductAdded');
+    @push('scripts')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                const value = sessionStorage.getItem('newProductAdded','productupdated');
                 $("#alert_msg").html(`<div class="alert alert-success alert-dismissible" role="alert">${value} </div>`);
-                 setTimeout(function(){
+                setTimeout(function() {
                     $("#alert_msg").hide();
-                },2000);
-              });
-            </script>
-@endpush
+                }, 2000);
+                if (value == 'null') {
+                    $("#alert_msg").hide();
+                }
+            });
+            //deleting data 
+
+            $('.dlt-btn').on('click', function(e) {
+                e.preventDefault();
+                let productId = $(this).data('id');
+                console.log(productId);
+
+
+                if (confirm('are your sure you want to delete this product ?')) {
+                    $.ajax({
+                        url: '{{ url('admin/product-list/delete') }}/' + productId,
+                        method: "GET",
+                        contentType: false,
+                        processData: false,
+                        success: function(res) {
+                            if (res.status === 'success') {
+                                console.log(res);
+                                alert('Product has been deleted!!');
+                                window.location.reload();
+
+                            }
+                        },
+                        error: function(error) {
+                            console.log(error);
+
+                        }
+
+                    });
+                }
+
+            });
+            //delete button end here
+            //edit button 
+            $('.edit-btn').on('click', function(e) {
+                e.preventDefault();
+                let productId = $(this).data('id');
+                console.log(productId);
+
+                $.ajax({
+                    url: '{{ url('admin/product-list/edit') }}/' + productId,
+                    method: "GET",
+
+                    success: function() {
+                        window.location.href = '{{ url('admin/product-list/edit') }}/' + productId;
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection

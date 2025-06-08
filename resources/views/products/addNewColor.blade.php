@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formAuthentication" class="mb-6" method="POST" action="{{ route('addNewColor.submit') }}"
+                    <form id="formUpdate" class="mb-6" method="POST" action="{{ route('addNewColor.submit') }}"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
@@ -21,7 +21,7 @@
                                 <label for="username" class="form-label">Enter Color Name</label>
                                 <input type="text" class="form-control" id="username" name="name"
                                     placeholder="Enter name of category" autofocus value="{{ old('name') }}" />
-                                <span class="text-danger">
+                                <span id="name" class="text-danger">
                                     @error('name')
                                         {{ $message }}
                                     @enderror
@@ -35,7 +35,7 @@
                                 <small id="emailHelp" class="form-text text-muted">Supported file formats = .JPG,.PNG,
                                     .JPEG</small>
                                 <br>
-                                <span class="text-danger">
+                                <span id="coolorthumbnail" class="text-danger">
                                     @error('colorthumbnail')
                                         {{ $message }}
                                     @enderror
@@ -54,7 +54,7 @@
                                         Listed
                                     </option>
                                 </select>
-                                <span class="text-danger">
+                                <span id="status" class="text-danger">
                                     @error('status')
                                         {{ $message }}
                                     @enderror

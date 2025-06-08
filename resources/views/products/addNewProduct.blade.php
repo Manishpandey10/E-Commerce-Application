@@ -181,7 +181,7 @@
                         success:function(res){
                             if(res.status === 'success'){
                                 console.log(res);
-                                sessionStorage.setItem('newProductAdded', res.newProductAdded)
+                                // sessionStorage.setItem('newProductAdded', res.newProductAdded)
                                 window.location.href = "{{ route('product.list') }}"
                             }
                         },
@@ -190,6 +190,7 @@
                         
 
                         const formError = error.responseJSON.errors;
+                        console.log(formError);
                         $('.text-danger').html('');
 
                         if( formError.productname ){

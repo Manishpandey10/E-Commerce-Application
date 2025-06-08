@@ -65,11 +65,16 @@
             $(document).ready(function() {
                 const value = sessionStorage.getItem('productAdded');
                 $("#alert_msg").html(`<div class="alert alert-success alert-dismissible" role="alert">${value} </div>`);
+                
                 sessionStorage.removeItem('productAdded');
+                if(value == 'null'){
+                  $( "#alert_msg" ).hide();
+                }
                 setTimeout(function(){
-                    $("#alert_msg").hide();
+                    $('#alert_msg').hide();
                 },2000);
-
+                console.log(value);
+               
             });
         </script>
     @endpush
