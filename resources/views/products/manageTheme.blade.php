@@ -66,7 +66,7 @@
                 // $("#alert_msg").html('');
                 if (deletedMsg) {
                     $("#alert_msg").html(
-                        `<div class="alert alert-success alert-dismissible" role="alert">${deletedMsg} </div>`);
+                        `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`);
                         
                 } else if (added) {
                     $("#alert_msg").html(
@@ -99,7 +99,7 @@
                             if (res.status === 'success') {
                                 console.log(res);
                                 alert('Product has been deleted!!');
-                                sessionStorage.setItem('ThemeDeleted', res.colorDeleted);
+                                sessionStorage.setItem('ThemeDeleted', res.ThemeDeleted);
                                 window.location.reload();
                             }
                         },

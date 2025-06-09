@@ -67,13 +67,13 @@
                 $("#alert_msg").html('');
                 if (deletedMsg) {
                     $("#alert_msg").html(
-                        `<div class="alert alert-success alert-dismissible" role="alert">${deletedMsg} </div>`);
+                        `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`);
                         
                 } else if (updateMsg) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${updateMsg} </div>`);
                          sessionStorage.clear();   
-                } else {
+                
                 } else if (added) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${added} </div>`);
