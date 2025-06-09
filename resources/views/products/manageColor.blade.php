@@ -60,6 +60,8 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
           <script>
             $(document).ready(function() {
+                
+                const added = sessionStorage.getItem('addedColor');
                 const deletedMsg = sessionStorage.getItem('colorDeleted');
                 const updateMsg = sessionStorage.getItem('colorEdit');
                 $("#alert_msg").html('');
@@ -70,6 +72,11 @@
                 } else if (updateMsg) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${updateMsg} </div>`);
+                         sessionStorage.clear();   
+                } else {
+                } else if (added) {
+                    $("#alert_msg").html(
+                        `<div class="alert alert-success alert-dismissible" role="alert">${added} </div>`);
                          sessionStorage.clear();   
                 } else {
                     $("#alert_msg").hide();

@@ -59,6 +59,8 @@
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
           <script>
             $(document).ready(function() {
+                
+                const added = sessionStorage.getItem('ThemeSuccess');
                 const deletedMsg = sessionStorage.getItem('ThemeDeleted');
                 const updateMsg = sessionStorage.getItem('updateTheme');
                 // $("#alert_msg").html('');
@@ -66,6 +68,11 @@
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${deletedMsg} </div>`);
                         
+                } else if (added) {
+                    $("#alert_msg").html(
+                        `<div class="alert alert-success alert-dismissible" role="alert">${added} </div>`);
+                        //  sessionStorage.clear();   
+                
                 } else if (updateMsg) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${updateMsg} </div>`);

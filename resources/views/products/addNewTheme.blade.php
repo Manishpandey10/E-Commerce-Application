@@ -1,6 +1,6 @@
 @extends('frontend.layouts.main')
 @section('main-container')
-<div class="row mx-4 mt-6 justify-content-center">
+    <div class="row mx-4 mt-6 justify-content-center">
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -12,15 +12,14 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formAuthentication" class="mb-6" method="POST" action="#"
-                        enctype="multipart/form-data">
+                    <form id="updateForm" class="mb-6" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-6 mb-4">
                                 <label class="form-label">Enter Theme Name</label>
                                 <input type="text" class="form-control" name="name"
                                     placeholder="Enter name of category" autofocus value="{{ old('name') }}" />
-                                <span class="text-danger">
+                                <span id="name" class="text-danger">
                                     @error('name')
                                         {{ $message }}
                                     @enderror
@@ -34,15 +33,15 @@
                                 <small id="emailHelp" class="form-text text-muted">Supported file formats = .JPG,.PNG,
                                     .JPEG</small>
                                 <br>
-                                <span class="text-danger">
+                                <span id="thumbnail" class="text-danger">
                                     @error('themethumbnail')
                                         {{ $message }}
                                     @enderror
                                 </span>
                             </div>
-                            
 
-                          
+
+
                             <div class="col-6 mb-4">
                                 <label for="category" class="form-label">Status</label>
                                 <select class="form-select" aria-label="Default select example" name="status">
@@ -53,7 +52,7 @@
                                         Listed
                                     </option>
                                 </select>
-                                <span class="text-danger">
+                                <span id='status' class="text-danger">
                                     @error('status')
                                         {{ $message }}
                                     @enderror
@@ -68,5 +67,46 @@
 
                     </form>
 
-    </div>
-@endsection
+                </div>
+                @push('scripts')
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+                            $('#updateForm').on('submit', function(e) {
+                                e.preventDefault();
+                                let formData = new FormData(this);
+                                $.ajax({
+                                    url: "{{ route('addNewTheme') }}",
+                                    method: "POST",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(res) {
+                                        if (res.status === 'success') {
+                                            console.log(res);
+                                            sessionStorage.setItem('ThemeSuccess', res.ThemeSucess);
+                                            window.location.href = "{{ route('manage.theme') }}";
+                                        }
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        let formError = error.responseJSON.errors;
+                                        $('.text-danger').html('');
+                                        if (formError.name) {
+                                            $('#name').html(formError.name[0]);
+                                        }
+                                        if (formError.status) {
+                                            $('#status').html(formError.status[0]);
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                @endpush
+            @endsection

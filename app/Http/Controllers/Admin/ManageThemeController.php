@@ -37,8 +37,12 @@ class ManageThemeController extends Controller
 
         $theme->status = $request->status;
         // dd($theme);
-        $theme->save(); // To save the data on the  database.
-        return redirect()->route('manage.theme')->with('ThemeSucess', "New Theme has been added.");
+        $theme->save(); 
+        return response()->json([
+            'status'=>'success',
+            'ThemeSucess'=> 'New Theme has been added'
+        ]);// To save the data on the  database.
+        // return redirect()->route('manage.theme')->with('ThemeSucess', "New Theme has been added.");
     }
     public function edit($id)
     {

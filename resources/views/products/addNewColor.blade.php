@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formUpdate" class="mb-6" method="POST" action="{{ route('addNewColor.submit') }}"
+                    <form id="updateForm" class="mb-6" 
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
@@ -70,4 +70,45 @@
                     </form>
 
     </div>
+         @push('scripts')
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                            });
+                            $('#updateForm').on('submit', function(e) {
+                                e.preventDefault();
+                                let formData = new FormData(this);
+                                $.ajax({
+                                    url: "{{ route('addNewColor.submit') }}",
+                                    method: "POST",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(res) {
+                                        if (res.status === 'success') {
+                                            console.log(res);
+                                            sessionStorage.setItem('addedColor', res.addedColor);
+                                            window.location.href = "{{ route('manage.color') }}";
+                                        }
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        let formError = error.responseJSON.errors;
+                                        $('.text-danger').html('');
+                                        if (formError.name) {
+                                            $('#name').html(formError.name[0]);
+                                        }
+                                        if (formError.status) {
+                                            $('#status').html(formError.status[0]);
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                @endpush
 @endsection

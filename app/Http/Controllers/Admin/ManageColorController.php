@@ -33,8 +33,11 @@ class ManageColorController extends Controller
         $color->status = $request->status;
         // dd($color);
         $color->save();
-
-        return redirect()->route('manage.color')->with('addedColor','New Color data has been added.');
+        return response()->json([
+            'status'=>'success',
+            'addedColor'=>'New Color data has been added.'
+        ]);
+        // return redirect()->route('manage.color')->with('addedColor','New Color data has been added.');
 
     }
     public function edit($id){
