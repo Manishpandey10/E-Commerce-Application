@@ -22,7 +22,11 @@ class ExchangePolicyController extends Controller
         $updatedpolicy->exchange_policy= $request->exchange_policy;
         // dd($updatedpolicy);
         $updatedpolicy->save();
-        return redirect()->back()->with('updateExchangePolicy','Exchange policy has been updated.');
+        return response()->json([
+            'status'=>'success',
+            'updateExchangePolicy'=>'Exchange policy has been updated.'
+        ]);
+        // return redirect()->back()->with('updateExchangePolicy','Exchange policy has been updated.');
     }
 
 }

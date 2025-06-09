@@ -25,7 +25,11 @@ class UpdatePolicyController extends Controller
         // dd($updatedPolicy);
 
         $updatedPolicy->save();
-        return redirect()->back()->with('updatePrivacyPolicy','Privacy policy has been updated!!');
+        return response()->json([
+            'status'=>'success',
+            'updatePrivacyPolicy'=>'Privacy policy has been updated!!'
+        ]);
+        // return redirect()->back()->with('updatePrivacyPolicy','Privacy policy has been updated!!');
     }
     public function exchange()
     {

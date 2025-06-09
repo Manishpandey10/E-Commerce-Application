@@ -24,6 +24,10 @@ class TermsPolicycontroller extends Controller
     $data->terms_condition = $request->terms_condition;
     // dd($data->terms_condition);
     $data->save();
+    return response()->json([
+        'status'=>'success',
+        'termSuccess'=>'Terms and conditions updated successfully!!'
+    ]);
     return redirect()->back()->with('termSuccess','Terms and conditions updated successfully!!');
     }
 }

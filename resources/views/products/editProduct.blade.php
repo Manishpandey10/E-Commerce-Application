@@ -182,6 +182,7 @@
                                     success: function(res) {
                                         if (res.status === 'success') {
                                             console.log(res);
+                                            sessionStorage.setItem('productupdated', res.productupdated);
                                             window.location.href = "{{ route('product.list') }}"
                                         }
                                     },

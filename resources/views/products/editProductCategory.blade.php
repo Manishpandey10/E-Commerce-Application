@@ -4,8 +4,8 @@
     <div class="row mx-4 mt-6 justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    @include('components.global-message')
+                <div  class="card-header d-flex justify-content-between align-items-center">
+                    {{-- @include('components.global-message') --}}
                     <h5 class="mb-0">Edit the product category</h5>
                 </div>
                 <div class="mx-5">
@@ -14,8 +14,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formAuthentication" class="mb-6" method="POST"
-                        action="{{ route('update.product', $categorydata->id) }}" enctype="multipart/form-data">
+                    <form id="updateForm" class="mb-6" data-id={{ $categorydata->id }} enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-6 mb-4">
@@ -24,7 +23,7 @@
                                     placeholder="Enter Product category name" name="categoryname"
                                     placeholder="Enter name of category" autofocus
                                     value="{{ $categorydata->categoryname }}" />
-                                <span class="text-danger">
+                                <span id="categoryname" class="text-danger">
                                     @error('categoryname')
                                         {{ $message }}
                                     @enderror
@@ -40,7 +39,7 @@
                                         rows="3" value="{{ $categorydata->productDescription }}"></input>
                                     <span class="input-group-text cursor-pointer"></span>
                                 </div>
-                                <span class="text-danger">
+                                <span id="productDescription" class="text-danger">
                                     @error('productDescription')
                                         {{ $message }}
                                     @enderror
@@ -97,7 +96,7 @@
                                         Unlisted</option>
 
                                 </select>
-                                <span class="text-danger">
+                                <span id="productStatus" class="text-danger">
                                     @error('productStatus')
                                         {{ $message }}
                                     @enderror
@@ -113,4 +112,53 @@
                     </form>
 
                 </div>
+            @push('scripts')
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        $('#updateForm').on('submit',function(e){
+                            e.preventDefault();
+                            let productId = $(this).data('id');
+                            $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                            });
+                            let formData = new FormData(this);
+                             $.ajax({
+                                    url: '{{ url('admin/manage-products/edit') }}/' + productId,
+                                    method: "POST",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(res) {
+                                       console.log(res);
+                                       if(res.status === 'success'){
+                                        window.location.href = "{{ route('manage.product') }}"
+                                        sessionStorage.setItem('updateSuccess','The product category details has been updated');
+                                    }
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                        let formError = error.responseJSON.errors;
+                                        $('.text-danger').html('');
+                                        if(formError.categoryname){
+                                            $('#categoryname').html(formError.categoryname[0]);
+                                        }
+                                        if(formError.productDescription){
+                                            $('#productDescription').html(formError.productDescription[0]);
+                                        }
+                                        if(formError.productStatus){
+                                            $('#productStatus').html(formError.productStatus[0]);
+                                        }
+                                        
+                                        
+                                    }
+
+                                });
+
+                        })
+                    });
+                </script>
+            @endpush    
             @endsection

@@ -3,7 +3,7 @@
     <div class="row mx-4 mt-6 justify-content-center">
         <div class="col-12">
             <div class="card">
-                <span class="text-success mx-6 mt-4">
+                <span  id="alert_msg" class="text-success mx-6 mt-4">
                     @include('components.global-message')
                 </span>
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                     {{-- {{dd($data->privacyPolicy);}} --}}
-                    <form action="{{ route('updatePrivacy-policy',$data->id) }}" method="POST">
+                    <form id="updateForm" data-id={{ $data->id }}>
                         @csrf
 
                         <div class="form-group mx-2 my-2">
@@ -23,4 +23,45 @@
                         </div>
                     </form>    
                 </div>
+                @push('scripts')
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function() {
+                            $("#updateForm").on('submit', function(e) {
+                                e.preventDefault();
+                                let formData = new FormData(this);
+                                let productId = $(this).data('id');
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                $.ajax({
+                                    url: '{{ url('admin/privacy-policy') }}/' + productId,
+                                    method: "POST",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(res) {
+                                        console.log(res);
+                                        let alert_msg = res.updatePrivacyPolicy;
+                                        $('#alert_msg').html(
+                                            `<div class="alert alert-success alert-dismissible" role="alert">${alert_msg} </div>`
+                                        );
+                                        setTimeout(function() {
+                                            $('#alert_msg').html('');
+                                            window.location.reload()
+                                        }, 1500);
+
+                                        alert('some chnges in the policy has been made!!');
+                                    },
+                                    error: function(error) {
+                                        console.log(error);
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                @endpush
             @endsection

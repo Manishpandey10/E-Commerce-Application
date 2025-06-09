@@ -20,7 +20,13 @@ class ManageCategoryController extends Controller
         // dd($data);
         if($data){
             $data->delete();
-            return redirect()->back()->with('productDeleted','Product Category has been deleted !');
+            return response()->json([
+            "status"=>"success",
+            'productDeleted'=> 'The product has been deleted!.'    
+
+        ]);
+        //laravel method below.   
+        // return redirect()->back()->with('productDeleted','Product Category has been deleted !');
         }
     }
     public function editpage($id){
@@ -37,11 +43,10 @@ class ManageCategoryController extends Controller
             'thumbnail'=>'nullable|image|mimes:png,jpg,jpeg',
             'metaTitle'=>'nullable',
             'metaDescription'=>'nullable',
-            'productStatus'=>'required||in:0,1'
+            'productStatus'=>'required|in:0,1'
         ],[
             'categoryname.required'=>'Product Category Name field is required.',
             'productDescription.required'=>'Enter Description field is required.',
-            'thumbnail.required'=>'Upload thumbnail field is required.',
             'productStatus.required'=>'Status  field is required.',
             'productStatus.in'=>'Status  field is required.',
         ]);
@@ -60,8 +65,12 @@ class ManageCategoryController extends Controller
         // dd($updatedcategory);
         $updatedcategory->save();
 
-        $page = ProductCategory::paginate(15);
-        return redirect()->route('manage.product',['page'=>$page])->with('updateSuccess','The product category details has been updated!');
+        // $page = ProductCategory::paginate(15);
+        return response()->json([
+            "status"=>"success",
+            'updateSuccess'=>"product category details has been updated successfully!"
+        ]);
+        // return redirect()->route('manage.product',['page'=>$page])->with('updateSuccess','The product category details has been updated!');
 
 
     }

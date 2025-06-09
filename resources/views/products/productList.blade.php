@@ -82,7 +82,8 @@
                                     </td>
                                 @endif
 
-                                <td><button type="button" class=" btn btn-primary edit-btn" data-id="{{ $data->id }}" name="edit ">Edit</button>&nbsp;&nbsp;
+                                <td><button type="button" class=" btn btn-primary edit-btn" data-id="{{ $data->id }}"
+                                        name="edit ">Edit</button>&nbsp;&nbsp;
                                     <button type="button" class="btn btn-primary dlt-btn"
                                         data-id="{{ $data->id }}">Delete</button>
                                 </td>
@@ -98,15 +99,27 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
             $(document).ready(function() {
-                const value = sessionStorage.getItem('newProductAdded','productupdated');
-                $("#alert_msg").html(`<div class="alert alert-success alert-dismissible" role="alert">${value} </div>`);
-                setTimeout(function() {
-                    $("#alert_msg").hide();
-                }, 2000);
-                if (value == 'null') {
+                const deletedMsg = sessionStorage.getItem('deleted');
+                const updateMsg = sessionStorage.getItem('productupdated');
+                $("#alert_msg").html('');
+                if (deletedMsg) {
+                    $("#alert_msg").html(
+                        `<div class="alert alert-success alert-dismissible" role="alert">${deletedMsg} </div>`);
+                        
+                } else if (updateMsg) {
+                    $("#alert_msg").html(
+                        `<div class="alert alert-success alert-dismissible" role="alert">${updateMsg} </div>`);
+                         sessionStorage.clear();   
+                } else {
                     $("#alert_msg").hide();
                 }
+                setTimeout(function() {
+                    $("#alert_msg").fadeOut();
+                    sessionStorage.clear();
+                }, 2000);
+
             });
+
             //deleting data 
 
             $('.dlt-btn').on('click', function(e) {
@@ -119,13 +132,12 @@
                     $.ajax({
                         url: '{{ url('admin/product-list/delete') }}/' + productId,
                         method: "GET",
-                        contentType: false,
-                        processData: false,
                         success: function(res) {
                             if (res.status === 'success') {
                                 console.log(res);
                                 alert('Product has been deleted!!');
                                 window.location.reload();
+                                sessionStorage.setItem('deleted', 'The product has been deleted!.');
 
                             }
                         },
@@ -150,6 +162,7 @@
                     method: "GET",
 
                     success: function() {
+
                         window.location.href = '{{ url('admin/product-list/edit') }}/' + productId;
                     },
                     error: function(error) {

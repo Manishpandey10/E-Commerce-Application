@@ -62,6 +62,10 @@ class ManageColorController extends Controller
 
     // dd($color);
     $color->save();
+    return response()->json([
+        'status'=>"success",
+        'colorEdit'=>'Color details has been updated successfully!!' 
+    ]);
     return redirect()->route('manage.color')->with('colorEdit','Color details has been updated successfully!!');
     }
 
@@ -69,7 +73,7 @@ class ManageColorController extends Controller
         $data = Color::find($id);
         // dd($data);
         $data->delete();
-
+        
         return redirect()->route('manage.color')->with('colorDeleted','Color details has been deleted');
     }
 

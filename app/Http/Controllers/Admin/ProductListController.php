@@ -91,7 +91,7 @@ class ProductListController extends Controller
         }
         //saving the data
         $updatedata->save();
-        $page = Productdata::paginate(15);
+        // $page = Productdata::paginate(15);
         return response()->json([
             "status"=>"success",
             'productupdated'=>"product details has been updated successfully!"

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.main')
 
 @section('main-container')
-<div class="row mx-4 mt-6 justify-content-center">
+    <div class="row mx-4 mt-6 justify-content-center">
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -10,15 +10,14 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="formAuthentication" class="mb-6" method="POST"
-                        action="{{ route('update.addNewColor', $color->id) }}" enctype="multipart/form-data">
+                    <form id="updateForm" data-id={{ $color->id }} class="mb-6" enctype="multipart/form-data">
                         @csrf
                         <div class="row ">
                             <div class="col-6 mb-4">
                                 <label for="username" class="form-label">Enter Color Name</label>
                                 <input type="text" class="form-control" id="username" name="name"
                                     placeholder="Enter name of product" autofocus value="{{ $color->name }}" />
-                                <span class="text-danger">
+                                <span id="name" class="text-danger">
                                     @error('name')
                                         {{ $message }}
                                     @enderror
@@ -49,7 +48,7 @@
                                         Unlisted</option>
                                 </select>
 
-                                <span class="text-danger">
+                                <span id="status" class="text-danger">
                                     @error('status')
                                         {{ $message }}
                                     @enderror
@@ -64,5 +63,49 @@
 
                     </form>
 
-    </div>
-@endsection
+                </div>
+                @push('scripts')
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+                    <script>
+                        $(document).ready(function() {
+                            $('#updateForm').on('submit', function(e) {
+                                e.preventDefault();
+                                let productId = $(this).data('id');
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                let formData = new FormData(this);
+                                 $.ajax({
+                                    url: '{{ url('admin/add-new-color/edit') }}/' + productId,
+                                    method: "POST",
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(res) {
+                                        if (res.status === 'success') {
+                                            console.log(res);
+                                            
+                                            sessionStorage.setItem('colorEdit', res.colorEdit);
+                                            window.location.href = "{{ route('manage.color') }}"
+                                        }
+                                    },
+                                    error:function(error){
+                                        console.log(error);
+                                        let formError = error.responseJSON.errors;
+                                        $('.text-danger').html('');
+                                        if(formError.name){
+                                            $('#name').html(formError.name[0]);
+                                        }
+                                        if(formError.status){
+                                            $('#status').html(formError.status[0]);
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                @endpush
+            @endsection

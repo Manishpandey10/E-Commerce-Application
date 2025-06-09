@@ -65,8 +65,11 @@ class ManageThemeController extends Controller
         $updatedtheme->status = $request->status;
         // dd($updatedtheme);
         $updatedtheme->save();
-
-        return redirect()->route('manage.theme')->with('updateTheme', "Theme details has been updated succesfuly.");
+        return response()->json([
+            'status'=>'success',
+            'updateTheme'=> 'Theme details has been updated succesfuly',
+        ]);
+        // return redirect()->route('manage.theme')->with('updateTheme', "Theme details has been updated succesfuly.");
 
     }
 
@@ -74,6 +77,10 @@ class ManageThemeController extends Controller
     {
         $data = Theme::find($id);
         $data->delete();
-        return redirect()->route('manage.theme')->with('ThemeDeleted', 'Theme Details has been deleted successfuly.');
+        return response()->json([
+            'status'=>'success',
+            'ThemeDeleted'=>'Theme Details has been deleted successfuly'
+        ]);
+        // return redirect()->route('manage.theme')->with('ThemeDeleted', 'Theme Details has been deleted successfuly.');
     }
 }
