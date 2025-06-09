@@ -68,13 +68,13 @@
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${value} </div>`);
 
-                    sessionStorage.removeItem('productAdded');
+                    sessionStorage.removeItem('updateSuccess');
 
                 } else if (deletedMsg) {
                     $("#alert_msg").html(
-                        `<div class="alert alert-success alert-dismissible" role="alert">${deletedMsg} </div>`);
+                        `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`);
 
-                    sessionStorage.removeItem('productAdded');
+                    sessionStorage.removeItem('productDeleted');
                 } else {
                     $("#alert_msg").hide();
                 }
@@ -82,7 +82,7 @@
                     $('#alert_msg').fadeOut();
                 }, 2000);
 
-                console.log(value);
+                
 
 
             });

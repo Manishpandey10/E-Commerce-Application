@@ -91,6 +91,7 @@
                         @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>
@@ -104,12 +105,12 @@
                 $("#alert_msg").html('');
                 if (deletedMsg) {
                     $("#alert_msg").html(
-                        `<div class="alert alert-success alert-dismissible" role="alert">${deletedMsg} </div>`);
+                        `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`);
                         
                 } else if (updateMsg) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${updateMsg} </div>`);
-                         sessionStorage.clear();   
+                         sessionStorage.removeItem('productUpdated');   
                 } else {
                     $("#alert_msg").hide();
                 }
