@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>User Registration Page</title>
+    <title>User Signup</title>
 
     <meta name="description" content="" />
 
@@ -119,9 +119,9 @@
                         <span class="text-danger">
                             @include('components.global-message')
                         </span>
-                        <h4 class="mb-1">Admin Account Creation 🚀</h4>
+                        <h4 class="mb-1">User's Sign up here 🚀</h4>
 
-                        <form id="formAuthentication" class="mb-6" method="POST" action="{{ route('registerUser') }}" enctype="multipart/form-data">
+                        <form id="formAuthentication" class="mb-6" method="POST" action="{{ route('register.user') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
                                 <label for="username" class="form-label">Username</label>
@@ -206,7 +206,7 @@
                         <p class="text-center">
                             <br>
                             <span>Already have an account?</span>
-                            <a href="{{ route('login') }}">
+                            <a href="{{ route('user.login') }}">
                                 <span>Sign in instead</span>
                             </a>
                         </p>

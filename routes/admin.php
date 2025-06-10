@@ -84,7 +84,7 @@
 
 
     Route::middleware('auth.custom')->group(function(){    
-        Route::get('/',[LoginController ::class , 'index'])->name('login');//login page
+        Route::get('/admin-login',[LoginController ::class , 'index'])->name('login');//login page
         Route::post('/login',[ LoginController::class,'verifylogin' ])->name('verifylogin');//login check
         Route::post('/signup',[SignupController::class, 'registeruser'])->name('registerUser');//registering the user to db
         Route::get('/signup',[SignupController::class, 'index'])->name('signup');

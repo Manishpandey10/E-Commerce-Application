@@ -15,4 +15,5 @@ class personalCustomerController extends Controller
         // dd($users);
         return view('managecustomers.personalCustomers.index', compact('users'));
     }
+
 }

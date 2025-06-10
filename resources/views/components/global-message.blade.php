@@ -22,6 +22,11 @@
         {{ session('loginError') }}
     </div>
 @endif
+@if (session('userError'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ session('userError') }}
+    </div>
+@endif
 {{-- signup error --}}
 @if (session('signupError'))
     <div class="alert alert-danger alert-dismissible" role="alert">

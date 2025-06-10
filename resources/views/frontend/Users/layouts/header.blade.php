@@ -122,8 +122,8 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
-                    <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <a href="{{ route('dashboard') }}" class="menu-link">
+                    <li class="menu-item {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('user.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-smile"></i>
                             <div class="text-truncate" data-i18n="Dashboards">Dashboard</div>
                         </a>
@@ -133,132 +133,23 @@
 
                     <!-- Pages -->
 
-
-
-
-                    <li
-                        class="menu-item {{ request()->routeIs(['update-profile', 'change-password']) ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div class="text-truncate" data-i18n="Form Layouts">Manage Profile</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('update-profile') ? 'active' : '' }}">
-                                <a href="{{ route('update-profile') }}" class="menu-link ">
-                                    <div class="text-truncate" data-i18n="Vertical Form">Update Profile</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->routeIs('change-password') ? 'active' : '' }}">
-                                <a href="{{ route('change-password') }}" class="menu-link ">
-                                    <div class="text-truncate" data-i18n="Vertical Form">Change Password</div>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li
-                        class="menu-item {{ request()->routeIs(['addnewcategory', 'manage.product']) ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                            <div class="text-truncate" data-i18n="Form Layouts">Manage Category</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('addnewcategory') ? 'active' : '' }}">
-                                <a href="{{ route('addnewcategory') }}" class="menu-link ">
-                                    <div class="text-truncate" data-i18n="Vertical Form">Add New category</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->routeIs('manage.product') ? 'active' : '' }}">
-                                <a href="{{ route('manage.product') }}" class="menu-link ">
-                                    <div class="text-truncate" data-i18n="Vertical Form">Product Categories</div>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li
-                        class="menu-item {{ request()->routeIs(['addProduct', 'product.list']) ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                            <div class="text-truncate" data-i18n="Form Layouts">Manage Product</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('addProduct') ? 'active' : '' }}">
-                                <a href="{{ route('addProduct') }}" class="menu-link ">
-                                    <div class="text-truncate" data-i18n="Vertical Form">Add New product</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->routeIs('product.list') ? 'active' : '' }}">
-                                <a href="{{ route('product.list') }}" class="menu-link ">
-                                    <div class="text-truncate" data-i18n="Vertical Form">Product List</div>
-                                </a>
-                            </li>
-                           
-
-                        </ul>
-                    </li>
-                     <li class="menu-item {{ request()->routeIs('manage.theme') ? 'active' : '' }}">
-                        <a href="{{ route('manage.theme') }}" class="menu-link">
+                     <li class="menu-item {{ request()->routeIs('all.post') ? 'active' : '' }}">
+                        <a href="{{ route('all.post') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-box"></i>
-                            <div class="text-truncate" data-i18n="Dashboards">Manage Theme</div>
+                            <div class="text-truncate" data-i18n="Dashboards">All Post</div>
                         </a>
 
                     </li>
-                     <li class="menu-item {{ request()->routeIs('manage.color') ? 'active' : '' }}">
+                     {{-- <li class="menu-item {{ request()->routeIs('manage.color') ? 'active' : '' }}">
                         <a href="{{ route('manage.color') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-box"></i>
                             <div class="text-truncate" data-i18n="Dashboards">Manage Color</div>
                         </a>
 
-                    </li>
+                    </li> --}}
 
                     {{-- manage products on sidebar --}}
-                    <li
-                        class="menu-item  {{ request()->routeIs(['personal.customer',]) ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-table"></i>
-                            <div class="text-truncate" data-i18n="Misc">Manage Customers</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('personal.customer') ? 'active' : '' }}">
-                                <a href="{{ route('personal.customer') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Error">Personal Customer</div>
-                                </a>
-                            </li>
-                            {{-- <li class="menu-item {{ request()->routeIs('business.customer') ? 'active' : '' }}">
-                                <a href="{{ route('business.customer') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Under Maintenance">Business Customer</div>
-                                </a>
-                            </li> --}}
-                        </ul>
-                    </li>
-                    {{-- ends here --}}
 
-
-                    <li
-                        class="menu-item {{ request()->routeIs(['privacy-policy', 'terms-and-condition', 'exchange-policy']) ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                            <div class="text-truncate" data-i18n="Authentications">Manage Policies</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ request()->routeIs('privacy-policy') ? 'active ' : '' }}">
-                                <a href="{{ route('privacy-policy') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Basic">Privacy Policy</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->routeIs('terms-and-condition') ? 'active ' : '' }}">
-                                <a href="{{ route('terms-and-condition') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Basic">Terms and Conditions</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ request()->routeIs('exchange-policy') ? 'active ' : '' }}">
-                                <a href="{{ route('exchange-policy') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Basic">Exchange and return policy </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                     <!-- Form Validation -->
 
 
@@ -301,7 +192,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('update-profile') }}">
+                                        <a class="dropdown-item" href="#">
                                             <div class="d-flex">
 
                                                     <div class="flex-shrink-0 me-3">
@@ -322,12 +213,12 @@
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('update-profile') }}">
+                                        <a class="dropdown-item" href="{{ route('user.profile', Auth::user()->id ) }}">
                                             <i class="icon-base bx bx-user icon-md me-3"></i><span>My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('change-password') }}">
+                                        <a class="dropdown-item" href="#">
                                             <i class="icon-base bx bx-cog icon-md me-3"></i><span>Change
                                                 Password</span>
                                         </a>
@@ -337,7 +228,7 @@
                                         <div class="dropdown-divider my-1"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}">
+                                        <a class="dropdown-item" href="{{ route('user.logout') }}">
                                             <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
                                         </a>
                                     </li>

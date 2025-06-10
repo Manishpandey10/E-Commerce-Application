@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CustomMiddleware
+class RedirectUser
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,14 @@ class CustomMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()){
-            return redirect()->route('user.login')->with('Error','You need to login to access desired page');
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->role_id == 1){
+                
+            }
+            else{
+                
+            }
         }
         return $next($request);
     }
