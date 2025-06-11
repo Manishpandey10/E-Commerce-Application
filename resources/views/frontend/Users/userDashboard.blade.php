@@ -12,10 +12,11 @@
                                     Dashboard, <strong>{{ Auth::user()->username }}</strong></h3>
                                     {{-- {{ dd($user->id); }} --}}
                                 <h3 class="mb-0 h4 font-weight-bolder">Email Id : <strong>{{ Auth::user()->email }}</strong>
+                                <h3 class="mb-0 h4 font-weight-bolder"> Id : <strong>{{ Auth::user()->id }}</strong>
                                 </h3>
                                 <div class="mt-6 mb-6">
                                     <button id="create_post" class="btn btn-info btn-md">Create Post</button>
-                                    <button id="profile" data-id={{ $user->id }} class="btn btn-info btn-md">Go to Profile</button>
+                                    <a id="profile" href="{{ route('user.profile', $user->id) }}" class="btn btn-info btn-md">Go to Profile</a>
                                 </div>
                                 <p id="p1" class="mb-4 mt-4">
                                     Check the sales, value and bounce rate by country.
@@ -51,21 +52,21 @@
                                     });
 
                                 });
-                                $('#profile').click(function(e) {
-                                    let id = $(this).data('id');
+                                // $('#profile').click(function(e) {
+                                //     let id = $(this).data('id');
 
-                                    e.preventDefault();
-                                    $.ajax({
-                                        url:'/users/user-profile/'+id ,
-                                        method:'GET',
-                                        success:function(){
-                                            window.location.href = '/users/user-profile/'+id 
-                                        },
-                                        error:function(error){
-                                            console.log(error);
-                                        }
-                                    });
-                                });
+                                //     e.preventDefault();
+                                //     $.ajax({
+                                //         url:'/users/user-profile/'+id ,
+                                //         method:'GET',
+                                //         success:function(){
+                                //             window.location.href = '/users/user-profile/'+id 
+                                //         },
+                                //         error:function(error){
+                                //             console.log(error);
+                                //         }
+                                //     });
+                                // });
                             });
                                
                         </script>

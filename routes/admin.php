@@ -43,21 +43,21 @@
         Route::post('/product-list/edit/{id}', [ProductListController::class, 'updateproduct'])->name('update.product.list'); //editing the existing products.
 
         //manage color route
-        Route::get('/manage-color',[ManageColorController::class , 'index'])->name('manage.color');
-        Route::get('/add-new-color',[ManageColorController::class , 'create'])->name('addNewColor');
-        Route::post('/add-new-color',[ManageColorController::class , 'store'])->name('addNewColor.submit');
-        Route::get('/add-new-color/edit/{id}',[ManageColorController::class , 'edit'])->name('addNewColor.edit');
-        Route::post('/add-new-color/edit/{id}',[ManageColorController::class , 'update'])->name('update.addNewColor');
-        Route::get('/add-new-color/delete/{id}',[ManageColorController::class , 'delete'])->name('delete.NewColor');
+        Route::get('/manage-color', [ManageColorController::class, 'index'])->name('manage.color');
+        Route::get('/add-new-color', [ManageColorController::class, 'create'])->name('addNewColor');
+        Route::post('/add-new-color', [ManageColorController::class, 'store'])->name('addNewColor.submit');
+        Route::get('/add-new-color/edit/{id}', [ManageColorController::class, 'edit'])->name('addNewColor.edit');
+        Route::post('/add-new-color/edit/{id}', [ManageColorController::class, 'update'])->name('update.addNewColor');
+        Route::get('/add-new-color/delete/{id}', [ManageColorController::class, 'delete'])->name('delete.NewColor');
         // Manage theme Routes
-        
-        
-        Route::get('/manage-theme',[ManageThemeController::class , 'index'])->name('manage.theme');
-        Route::get('/add-new-theme',[ManageThemeController::class , 'create'])->name('addNewTheme');
-        Route::post('/add-new-theme',[ManageThemeController::class , 'store'])->name('addNewTheme.submit');
-        Route::get('/add-new-theme/edit/{id}',[ManageThemeController::class, 'edit'])->name('addNewTheme.edit');
-        Route::post('/add-new-theme/edit/{id}',[ManageThemeController::class, 'update'])->name('update.addNewTheme');
-        Route::get('add-new-theme/delete/{id}',[ManageThemeController::class, 'delete'])->name('delete.NewTheme');
+
+
+        Route::get('/manage-theme', [ManageThemeController::class, 'index'])->name('manage.theme');
+        Route::get('/add-new-theme', [ManageThemeController::class, 'create'])->name('addNewTheme');
+        Route::post('/add-new-theme', [ManageThemeController::class, 'store'])->name('addNewTheme.submit');
+        Route::get('/add-new-theme/edit/{id}', [ManageThemeController::class, 'edit'])->name('addNewTheme.edit');
+        Route::post('/add-new-theme/edit/{id}', [ManageThemeController::class, 'update'])->name('update.addNewTheme');
+        Route::get('add-new-theme/delete/{id}', [ManageThemeController::class, 'delete'])->name('delete.NewTheme');
 
 
 
@@ -83,9 +83,9 @@
     });
 
 
-    Route::middleware('auth.custom')->group(function(){    
-        Route::get('/admin-login',[LoginController ::class , 'index'])->name('login');//login page
-        Route::post('/login',[ LoginController::class,'verifylogin' ])->name('verifylogin');//login check
-        Route::post('/signup',[SignupController::class, 'registeruser'])->name('registerUser');//registering the user to db
-        Route::get('/signup',[SignupController::class, 'index'])->name('signup');
-    });    
+    Route::middleware('auth.custom')->group(function () {
+        Route::get('/admin-login', [LoginController::class, 'index'])->name('login'); //login page
+        Route::post('/login', [LoginController::class, 'verifylogin'])->name('verifylogin'); //login check
+        Route::post('/signup', [SignupController::class, 'registeruser'])->name('registerUser'); //registering the user to db
+        Route::get('/signup', [SignupController::class, 'index'])->name('signup');
+    });

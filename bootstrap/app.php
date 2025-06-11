@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CustomMiddleware;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
+use App\Http\Middleware\RedirectUser;
 use App\Http\Middleware\UsersMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,7 +18,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth.access'=>CustomMiddleware::class,
             'auth.custom'=>EnsureUserIsAuthenticated::class,
-            'user.custom'=>UsersMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/all-posts', [PostController::class, 'showAllPosts'])->name('all.post');
 });
 
-    
+
     Route::get('/', [UserLoginController::class, 'index'])->name('user.login');
     Route::post('/user-login', [UserLoginController::class, 'verifyUser'])->name('verify.user');
     

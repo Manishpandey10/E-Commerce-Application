@@ -177,6 +177,12 @@
                   <span>Create an account</span>
                 </a>
               </p>
+              <p class="text-center">
+                <span>Not an admin?</span>
+                <a href="{{ route('user.login') }}">
+                  <span>User's Login here</span>
+                </a>
+              </p>
             </div>
           </div>
           <!-- /Register -->

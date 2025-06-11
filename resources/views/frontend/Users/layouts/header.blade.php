@@ -217,12 +217,12 @@
                                             <i class="icon-base bx bx-user icon-md me-3"></i><span>My Profile</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a class="dropdown-item" href="#">
                                             <i class="icon-base bx bx-cog icon-md me-3"></i><span>Change
                                                 Password</span>
                                         </a>
-                                    </li>
+                                    </li> --}}
 
                                     <li>
                                         <div class="dropdown-divider my-1"></div>

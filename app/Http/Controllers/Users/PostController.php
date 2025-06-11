@@ -19,9 +19,10 @@ class PostController extends Controller
         return view('frontend.Users.createPost');
     }
     public function profile($id){
+        
         $post = Post::where('id',$id)->get();
-        // dd($post);
         return view('frontend.Users.userProfile', compact('post'));
+    
     }
     public function post(Request $request){
         $request->validate([

@@ -178,7 +178,7 @@
                 </a>
               </p>
               <p class="text-center">
-                <span>Are you and Admin?</span>
+                <span>Are you an Admin?</span>
                 <a href="{{ route('login') }}">
                   <span>Login here</span>
                 </a>
