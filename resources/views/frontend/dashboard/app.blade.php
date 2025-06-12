@@ -7,7 +7,9 @@
                     <div class="container-fluid py-2 mt-7">
                         <div class="row">
                             <div class="ms-3">
-                                @include('components.global-message')
+                                <div id="alert_msg">
+                                    @include('components.global-message')
+                                </div>
                                 <h3 class="mb-0 h4 font-weight-bolder">Welcome to your
                                     Dashboard, <strong>{{ Auth::user()->username }}</strong></h3>
                                 <h3 class="mb-0 h4 font-weight-bolder">Email Id : <strong>{{ Auth::user()->email }}</strong>
@@ -51,7 +53,11 @@
                     @push('scripts')
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                         <script>
-                            $(document).ready(function() {
+                            $(document).ready(function() {4
+                           
+                                setTimeout(function() {
+                                    $('#alert_msg').fadeOut();
+                                }, 3000);
                                 // $('p').css('color','green');
                                 $('#button').click(function() {
                                     $('p')
