@@ -121,7 +121,8 @@
                         </span>
                         <h4 class="mb-1">User's Sign up here 🚀</h4>
 
-                        <form id="formAuthentication" class="mb-6" method="POST" action="{{ route('register.user') }}" enctype="multipart/form-data">
+                        <form id="formAuthentication" class="mb-6" method="POST"
+                            action="{{ route('register.user') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
                                 <label for="username" class="form-label">Username</label>
@@ -179,7 +180,8 @@
                             <div class="mb-6">
                                 <label class="form-label" for="basic-default-phone">Phone No</label>
                                 <input type="tel" id="basic-default-phone" name="phone"
-                                    class="form-control phone-mask" placeholder="+91 1234567890" value="{{ old('phone') }}" />
+                                    class="form-control phone-mask" placeholder="+91 1234567890"
+                                    value="{{ old('phone') }}" />
                                 <span class="text-danger">
                                     @error('phone')
                                         {{ $message }}
@@ -190,11 +192,11 @@
                                 <label class="form-file" for="basic-default-message">Upload profile Picture</label>
                                 <input type="file" accept="image/jpeg, image/jpg, image/png" name="profileimage"
                                     id="basic-default-message" class="form-control"></input>
-                                    <span class="text-danger">
-                                            @error('profileimage')
-                                                {{ $message }}
-                                            @enderror
-                                    </span>
+                                <span class="text-danger">
+                                    @error('profileimage')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="my-4">
                                 <div class="form-check mb-0">
@@ -210,6 +212,12 @@
                                 <span>Sign in instead</span>
                             </a>
                         </p>
+                        {{-- <p class="text-center">
+                            <span>Signing up as a admin?</span>
+                            <a href="{{ route('signup') }}">
+                                <span>Create an account</span>
+                            </a>
+                        </p> --}}
                     </div>
                 </div>
                 <!-- Register Card -->

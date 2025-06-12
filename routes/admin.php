@@ -6,7 +6,8 @@
     use App\Http\Controllers\Admin\LoginController;
     use App\Http\Controllers\Admin\ManageCategoryController;
     use App\Http\Controllers\Admin\ManageColorController;
-    use App\Http\Controllers\Admin\ManageThemeController;
+use App\Http\Controllers\Admin\ManagePostsController;
+use App\Http\Controllers\Admin\ManageThemeController;
     use App\Http\Controllers\Admin\newCategoryController;
     use App\Http\Controllers\Admin\ProductListController;
     use App\Http\Controllers\Admin\SignupController;
@@ -19,7 +20,7 @@
     use App\Http\Controllers\PolicyController\TermsAndConditions\TermsPolicycontroller;
     use Illuminate\Support\Facades\Route;
 
-    Route::group(['prefix' => '/admin', 'middleware' => ['auth.access']], function () {
+    Route::group(['prefix' => '/admin', 'middleware' => ['is.user','auth.access']], function () {
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout'); //logout function
 
 
@@ -80,11 +81,15 @@
         Route::post('/change-password', [ChangePasswordController::class, 'changepassword'])->name('updated-password');
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        //manage post table route
+        Route::get('/manage-post',[ManagePostsController::class , 'index'])->name('manage.post');
+        Route::get('/manage-post/delete/{id?}',[ManagePostsController::class , 'delete'])->name('delete.post');
+        
     });
 
 
     Route::middleware('auth.custom')->group(function () {
-        Route::get('/admin-login', [LoginController::class, 'index'])->name('login'); //login page
+        Route::get('/admin', [LoginController::class, 'index'])->name('login'); //login page for admin
         Route::post('/login', [LoginController::class, 'verifylogin'])->name('verifylogin'); //login check
         Route::post('/signup', [SignupController::class, 'registeruser'])->name('registerUser'); //registering the user to db
         Route::get('/signup', [SignupController::class, 'index'])->name('signup');

@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class PostController extends Controller
 {
@@ -19,8 +20,8 @@ class PostController extends Controller
         return view('frontend.Users.createPost');
     }
     public function profile($id){
-        
-        $post = Post::where('id',$id)->get();
+        // $user_id = Auth::user()->id;
+        $post = Post::where('user_id',$id)->get();
         return view('frontend.Users.userProfile', compact('post'));
     
     }
@@ -35,12 +36,16 @@ class PostController extends Controller
         'picture.required'=>'Upload Picture  field is required.',
         'description.required'=>'Enter Description field is required.'
     ]);
+    $user = Auth::user();
+    // dd($user);
     $data = new Post;
     $data->post_title = $request->post_title;
     $data->description = $request->description;
+
     if($request->hasFile('picture')){
         $data->picture = $request->file('picture')->store('postThumbnail', 'public');
     }
+    $data->user_id = $user->id;
     // dd($data);
     $data->save();
     // return response()->json([

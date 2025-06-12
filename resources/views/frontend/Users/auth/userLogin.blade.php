@@ -119,15 +119,6 @@
                 </a>
               </div>
               <!-- /Logo -->
-              {{-- <span class="bg-success text-success">
-                {{ session()->get('registerSuccess') }}
-              </span>
-              <span class="bg-danger text-white">
-                {{ session()->get('loginError') }}
-              </span>
-              <span class="text-success">
-                {{ session()->get('logoutMessage') }}
-              </span> --}}
               @include('components.global-message')
               <form id="formAuthentication" class="mb-6" action="{{ route('verify.user') }}" method="POST">
                 @csrf
@@ -177,12 +168,12 @@
                   <span>Create an account</span>
                 </a>
               </p>
-              <p class="text-center">
-                <span>Are you an Admin?</span>
-                <a href="{{ route('login') }}">
-                  <span>Login here</span>
-                </a>
-              </p>
+                {{-- <p class="text-center">
+                  <span>Are you an Admin?</span>
+                  <a href="{{ route('login') }}">
+                    <span>Login here</span>
+                  </a>
+                </p> --}}
             </div>
           </div>
           <!-- /Register -->

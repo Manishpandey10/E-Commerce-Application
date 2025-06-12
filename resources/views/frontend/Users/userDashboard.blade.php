@@ -12,7 +12,6 @@
                                     Dashboard, <strong>{{ Auth::user()->username }}</strong></h3>
                                     {{-- {{ dd($user->id); }} --}}
                                 <h3 class="mb-0 h4 font-weight-bolder">Email Id : <strong>{{ Auth::user()->email }}</strong>
-                                <h3 class="mb-0 h4 font-weight-bolder"> Id : <strong>{{ Auth::user()->id }}</strong>
                                 </h3>
                                 <div class="mt-6 mb-6">
                                     <button id="create_post" class="btn btn-info btn-md">Create Post</button>

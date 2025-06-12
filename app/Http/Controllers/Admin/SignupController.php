@@ -34,7 +34,7 @@ class SignupController extends Controller
         $newuser->profileimage = $request->file('profileimage')->store('profileimage', 'public');
         $newuser->save();
 
-        return redirect()->route('login')->with([
+        return redirect()->route('user.login')->with([
             "registerSuccess" => "User has been registred successfully!! Login to Proceed"
         ])->withInput();
     }

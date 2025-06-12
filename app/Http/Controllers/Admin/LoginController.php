@@ -31,10 +31,14 @@ class LoginController extends Controller
                 'password' => $request->password
             ]
         )) {
-            return redirect()->route('dashboard')->with('loginSuccess', "Log in successfull, welcome to dashboard")->withInput();
-        } else {
-            return redirect()->back()->with('loginError', "Invalid credentials, Please enter correct details!!");
+            if (Auth::user()->role_id == 1) {
+                return redirect()->route('dashboard')->with('loginSuccess','Login successfull, welcome to your dashboard!!');
+            }
+            else if(Auth::user()->role_id ==2 ){
+            return redirect()->back()->with('AdminError', "You're not an admin!");
+            }
         }
+        return redirect()->back()->with("userError", "Invalid credentials, Please enter correct details!!");
     }
     public function logout()
     {

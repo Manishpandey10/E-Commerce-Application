@@ -19,12 +19,10 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Product Name</th>
-                            <th>Color Name</th>
+                            <th>Product details</th>
+
                             <th>Product Description</th>
-                            <th>Thumbnail</th>
-                            <th>Theme</th>
-                            <th>Product category</th>
+
                             <th>Created At</th>
                             <th>Status</th>
                             <th>actions</th>
@@ -34,42 +32,40 @@
                         @foreach ($productdata as $data)
                             <tr>
                                 <td>{{ $data->id }}</td>
-                                <td>{{ $data->productname }}</td>
-                                @if ($data->color->status == 0)
-                                    <td>
-                                        <span class="text-danger">{{ $data->color->name }}</span>
-                                    </td>
-                                @else
-                                    <td>
-                                        <span class="text-success">{{ $data->color->name }}</span>
-                                    </td>
-                                @endif
-
-                                <td>{{ $data->productDescription }}</td>
-                                {{-- product thumbnail --}}
-                                <td><img src="{{ url('storage/' . $data->productthumbnail) }}" width="50px"
-                                        height="50px">
+                                <td>{{ $data->productname }}
+                                    <div>
+                                        {{-- Thumbnail --}}
+                                        <img src="{{ url('storage/' . $data->productthumbnail) }}" width="50px"
+                                            height="50px" alt="Thumbnail">
+                                    </div>
+                                    <div>
+                                        @if ($data->color->status == 0)
+                                            <span class="text-danger">{{ $data->color->name }}</span>
+                                        @else
+                                            <span class="text-success">{{ $data->color->name }}</span>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        @if ($data->theme->status == 0)
+                                            <span class="text-danger">{{ $data->theme->name }}</span>
+                                        @else
+                                            <span class="text-success">{{ $data->theme->name }}</span>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        @if ($data->category->productStatus == 0)
+                                            <span class="text-danger">{{ $data->category->categoryname }}</span>
+                                        @else
+                                            <span class="text-success">{{ $data->category->categoryname }}</span>
+                                        @endif
+                                    </div>
                                 </td>
 
-                                @if ($data->theme->status == 0)
-                                    <td>
-                                        <span class="text-danger">{{ $data->theme->name }}</span>
-                                    </td>
-                                @else
-                                    <td>
-                                        <span class="text-success">{{ $data->theme->name }}</span>
-                                    </td>
-                                @endif
-                                {{-- theme table data ends here --}}
-                                @if ($data->category->productStatus == 0)
-                                    <td>
-                                        <span class="text-danger">{{ $data->category->categoryname }}</span>
-                                    </td>
-                                @else
-                                    <td>
-                                        <span class="text-success">{{ $data->category->categoryname }}</span>
-                                    </td>
-                                @endif
+
+                                <td>{{ $data->productDescription }}</td>
+
+
+
                                 <td>{{ $data->created_at }}</td>
 
                                 @if ($data->productStatus == '0')
@@ -108,20 +104,16 @@
                 if (deletedMsg) {
                     $("#alert_msg").html(
                         `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`);
-                        
-                } 
-                else if (added) {
+
+                } else if (added) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${added} </div>`);
-                         sessionStorage.clear();  
-                }
-                
-                else if (updateMsg) {
+                    sessionStorage.clear();
+                } else if (updateMsg) {
                     $("#alert_msg").html(
                         `<div class="alert alert-success alert-dismissible" role="alert">${updateMsg} </div>`);
-                         sessionStorage.clear();   
-                } 
-                else {
+                    sessionStorage.clear();
+                } else {
                     $("#alert_msg").hide();
                 }
                 setTimeout(function() {

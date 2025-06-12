@@ -204,6 +204,13 @@
                         </a>
 
                     </li>
+                     <li class="menu-item {{ request()->routeIs('manage.post') ? 'active' : '' }}">
+                        <a href="{{ route('manage.post') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-box"></i>
+                            <div class="text-truncate" data-i18n="Dashboards">Manage Posts</div>
+                        </a>
+
+                    </li>
                      <li class="menu-item {{ request()->routeIs('manage.color') ? 'active' : '' }}">
                         <a href="{{ route('manage.color') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-box"></i>

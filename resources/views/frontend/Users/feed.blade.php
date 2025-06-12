@@ -18,7 +18,6 @@
                                 <strong>Description</strong><br>
                                 {{ $post->description }}
                             </p>
-                            <a href="{{ route('user.dashboard') }}" class="btn btn-outline-primary">Go To User Dashboard</a>
                         </div>
                     </div>
                 </div>

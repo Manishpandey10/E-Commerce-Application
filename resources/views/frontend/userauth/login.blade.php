@@ -172,17 +172,12 @@
               </form>
 
               <p class="text-center">
-                <span>Signing up as a admin?</span>
-                <a href="{{ route('signup') }}">
+                <span>Not an user ?</span>
+                <a href="{{ route('user.signup') }}">
                   <span>Create an account</span>
                 </a>
               </p>
-              <p class="text-center">
-                <span>Not an admin?</span>
-                <a href="{{ route('user.login') }}">
-                  <span>User's Login here</span>
-                </a>
-              </p>
+              
             </div>
           </div>
           <!-- /Register -->

@@ -9,13 +9,14 @@
                   <img class="card-img-top" src="{{ url('storage/' . $post->picture) }}" alt="Card image cap" />
                   <div class="card-body">
                       <h5 class="card-title"><strong>Post Title</strong> :{{ $post->post_title }}</h5>
+                             <h6 class="card-title">Post uploaded on: {{ $post->created_at }}</h5>
+
                       <hr>
                       <p class="card-text">
                           <strong>Description</strong><br>
                           {{ $post->description }}
                       </p>
-                      <a href="{{ route('user.dashboard') }}" class="btn btn-outline-primary">Go To
-                          User Dashboard</a>
+                    
                   </div>
               </div>
           </div>

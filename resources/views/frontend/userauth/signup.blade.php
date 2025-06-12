@@ -206,7 +206,7 @@
                         <p class="text-center">
                             <br>
                             <span>Already have an account?</span>
-                            <a href="{{ route('login') }}">
+                            <a href="{{ route('user.login') }}">
                                 <span>Sign in instead</span>
                             </a>
                         </p>

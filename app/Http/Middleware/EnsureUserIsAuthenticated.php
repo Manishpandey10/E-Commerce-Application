@@ -18,7 +18,7 @@ class EnsureUserIsAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            return redirect()->route('dashboard')->with('accessError',"You are already logged in !! You need to logout to access desired page.");
+            return redirect()->route('user.dashboard')->with('accessError',"You are already logged in !! You need to logout to access desired page.");
         }   
         
         return $next($request);

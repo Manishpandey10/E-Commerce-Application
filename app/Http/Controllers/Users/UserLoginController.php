@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserLoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('frontend.Users.auth.userLogin');
     }
-    public function verifyUser(Request $request){
+    public function verifyUser(Request $request)
+    {
         $request->validate(
             [
                 'email' => 'required|email',
@@ -22,19 +24,23 @@ class UserLoginController extends Controller
                 'password.required' => 'Password is required',
             ]
         );
-        if(Auth::attempt(
+        if (Auth::attempt(
             [
                 'email' => $request->email,
                 'password' => $request->password
             ]
-        )){
-            return redirect()->route('user.dashboard');
+        )) {
+            // return redirect()->route('user.dashboard');
+            if (Auth::user()->role_id == 2) {
+                return redirect()->route('user.dashboard');
+            } elseif (Auth::user()->role_id == 1) {
+                return redirect()->route('dashboard');
+            }
         }
-        else{
-            return redirect()->back()->with("userError","Invalid credentials, Please enter correct details!!");
-        }
+
+        return redirect()->back()->with("userError", "Invalid credentials, Please enter correct details!!");
     }
-     public function logout()
+    public function logout()
     {
         Auth::logout();
         return redirect()->route('user.login')->with('logoutMessage', "You've been logged out!. Please log in again to continue.");

@@ -151,3 +151,26 @@
         {{ session('BtnClick') }}
     </div>
 @endif
+{{-- is user auth aceess --}}
+@if (session('deniedAdminAcess'))
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {{ session('deniedAdminAcess') }}
+    </div>
+@endif
+@if (session('deniedUserAcess'))
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {{ session('deniedUserAcess') }}
+    </div>
+@endif
+@if (session('AdminError'))
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {{ session('AdminError') }}
+    </div>
+@endif
+@if (session('postDeleted'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ session('postDeleted') }}
+    </div>
+@endif
+{{--  --}}
+
