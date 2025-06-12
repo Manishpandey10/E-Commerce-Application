@@ -224,12 +224,12 @@
                         class="menu-item  {{ request()->routeIs(['personal.customer',]) ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-table"></i>
-                            <div class="text-truncate" data-i18n="Misc">Manage Customers</div>
+                            <div class="text-truncate" data-i18n="Misc">Manage users</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item {{ request()->routeIs('personal.customer') ? 'active' : '' }}">
                                 <a href="{{ route('personal.customer') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Error">Personal Customer</div>
+                                    <div class="text-truncate" data-i18n="Error">Users</div>
                                 </a>
                             </li>
                             {{-- <li class="menu-item {{ request()->routeIs('business.customer') ? 'active' : '' }}">

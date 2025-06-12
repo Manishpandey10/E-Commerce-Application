@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminRedirect;
 use App\Http\Middleware\CustomMiddleware;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use App\Http\Middleware\isAdmin;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'auth.access'=>CustomMiddleware::class,
             'auth.custom'=>EnsureUserIsAuthenticated::class,
+            'auth.adminDashboard'=>AdminRedirect::class,
             'is.user'=>isUser::class,
             'is.Admin'=>isAdmin::class,
         ]);

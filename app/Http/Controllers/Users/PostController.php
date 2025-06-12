@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class PostController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
         $user  = Auth::user();
+        // dd($user);
         return view('frontend.Users.userDashboard', compact('user'));
     }
     public function create(){
@@ -56,6 +57,14 @@ class PostController extends Controller
     }   
     public function showAllPosts(){
         $posts = Post::all();
+
+        return view('frontend.Users.feed', compact('posts'));
+    }
+    public function search(Request $request){
+        $search = $request['search']?? "";
+        if($search != ''){
+            $posts = Post::where('post_title','LIKE',"%$search%")->get();
+        }
 
         return view('frontend.Users.feed', compact('posts'));
     }

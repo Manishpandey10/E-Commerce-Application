@@ -88,7 +88,7 @@ use App\Http\Controllers\Admin\ManageThemeController;
     });
 
 
-    Route::middleware('auth.custom')->group(function () {
+    Route::middleware('auth.adminDashboard')->group(function () {
         Route::get('/admin', [LoginController::class, 'index'])->name('login'); //login page for admin
         Route::post('/login', [LoginController::class, 'verifylogin'])->name('verifylogin'); //login check
         Route::post('/signup', [SignupController::class, 'registeruser'])->name('registerUser'); //registering the user to db
