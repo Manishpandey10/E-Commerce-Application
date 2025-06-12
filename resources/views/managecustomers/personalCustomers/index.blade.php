@@ -10,7 +10,7 @@
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>Customer name</th>
+                            <th>User name</th>
                             <th>email</th>
                             <th>Phone</th>
                             <th>Registered At</th>
