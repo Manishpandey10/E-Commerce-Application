@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="{{ url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap') }}"
+    rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ url('landing_page/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('landing_page/css/style.css') }}" type="text/css">
+</head>
+
+<body>
+     <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__option">
+            <div class="offcanvas__links">
+                <a href="#">Sign in</a>
+            </div>
+            <div class="offcanvas__top__hover">
+                <span>Usd <i class="arrow_carrot-down"></i></span>
+                <ul>
+                    <li>USD</li>
+                    <li>EUR</li>
+                    <li>USD</li>
+                </ul>
+            </div>
+        </div>
+        <div class="offcanvas__nav__option">
+            <a href="#" class="search-switch"><img src="{{ url('landing_page/img/icon/search.png') }}" alt=""></a>
+            <a href="#"><img src="{{ url('landing_page/img/icon/heart.png') }}" alt=""></a>
+            <a href="#"><img src="{{ url('landing_page/img/icon/heart.png') }}" alt=""> <span>0</span></a>
+            
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__text">
+            <p>Free shipping, 30-day return or refund guarantee.</p>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-7">
+                        <div class="header__top__left">
+                            <p>Free shipping, 30-day return or refund guarantee.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-5">
+                        <div class="header__top__right">
+                            <div class="header__top__links">
+                                <a href="{{ route('user.login') }}">Sign in</a>
+                                <a href="#">FAQs</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{{ url('landing_page/img/logo.png') }}" alt=""></a>
+                    </div>
+                </div>
+                {{-- {{ dd(request()->route()->getName()) }} --}}
+
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="{{ request()->routeIs('landing.page') ? 'active' : '' }}"><a href="{{ route('landing.page') }}">Home</a></li>
+                            <li class="{{ request()->routeIs('shop.page') ? 'active' : '' }}"><a href="{{ route('shop.page') }}">Shop</a></li>
+                            
+                            <li><a href="#">Shopping Cart</a></li>
+                            <li class="{{ request()->routeIs('contact.page') ? 'active' : '' }}"><a href="{{ route('contact.page') }}">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__nav__option">
+                        <a href="#" class="search-switch"><img src="{{ url('landing_page/img/icon/search.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ url('landing_page/img/icon/heart.png') }}" alt=""></a>
+                      
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    <section class="hero">
+        <div class="hero__slider owl-carousel">
+            <div class="hero__items set-bg" data-setbg="{{ url('landing_page/img/hero/hero-1.jpg') }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Summer Collection</h6>
+                                <h2>Fall - Winter Collections 2030</h2>
+                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
+                                commitment to exceptional quality.</p>
+                                <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                                <div class="hero__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__items set-bg" data-setbg="{{ url('landing_page/img/hero/hero-2.jpg') }}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-7 col-md-8">
+                            <div class="hero__text">
+                                <h6>Summer Collection</h6>
+                                <h2>Fall - Winter Collections 2030</h2>
+                                <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
+                                commitment to exceptional quality.</p>
+                                <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                                <div class="hero__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Banner Section Begin -->
+    <section class="banner spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-4">
+                    <div class="banner__item">
+                        <div class="banner__item__pic">
+                            <img src="{{ url('landing_page/img/banner/banner-1.jpg') }}" alt="">
+                        </div>
+                        <div class="banner__item__text">
+                            <h2>Clothing Collections 2030</h2>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="banner__item banner__item--middle">
+                        <div class="banner__item__pic">
+                            <img src="{{ url('landing_page/img/banner/banner-2.jpg') }}" alt="">
+                        </div>
+                        <div class="banner__item__text">
+                            <h2>Accessories</h2>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="banner__item banner__item--last">
+                        <div class="banner__item__pic">
+                            <img src="{{ url('landing_page/banner/banner-3.jpg') }}" alt="">
+                        </div>
+                        <div class="banner__item__text">
+                            <h2>Shoes Spring 2030</h2>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="filter__controls">
+                        <li class="active" data-filter="*">Best Sellers</li>
+                        <li data-filter=".new-arrivals">New Arrivals</li>
+                        <li data-filter=".hot-sales">Hot Sales</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row product__filter">
+                @foreach ($productdata as $data)
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="{{ url('storage/'.$data->productthumbnail) }}">
+                            <span class="label">New</span>
+                            <ul class="product__hover">
+                                <li><a href="#"><img src="{{ url('landing_page/img/icon/heart.png') }}" alt=""></a></li>
+                                <li><a href="#"><img src="{{ url('landing_page/img/icon/compare.png') }}" alt=""> <span>Compare</span></a></li>
+                                <li><a href="#"><img src="{{ url('landing_page/img/icon/search.png') }}" alt=""></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6>{{$data->productname}}</h6>
+                            <a href="#" class="add-cart">+ Add To Cart</a>
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <h5>$67.24</h5>
+                            <div class="product__color__select">
+                                <label for="pc-1">
+                                    <input type="radio" id="pc-1">
+                                </label>
+                                <label class="active black" for="pc-2">
+                                    <input type="radio" id="pc-2">
+                                </label>
+                                <label class="grey" for="pc-3">
+                                    <input type="radio" id="pc-3">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+    <!-- Instagram Section Begin -->
+    <section class="instagram spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="instagram__pic">
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ url('landing_page/img/instagram/instagram-1.jpg') }}"></div>
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ url('landing_page/img/instagram/instagram-1.jpg') }}"></div>
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ url('landing_page/img/instagram/instagram-1.jpg') }}"></div>
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ url('landing_page/img/instagram/instagram-1.jpg') }}"></div>
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ url('landing_page/img/instagram/instagram-1.jpg') }}"></div>
+                        <div class="instagram__pic__item set-bg" data-setbg="{{ url('landing_page/img/instagram/instagram-1.jpg') }}"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="instagram__text">
+                        <h2>Instagram</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua.</p>
+                        <h3>#Male_Fashion</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Instagram Section End -->
+
+    <!-- Latest Blog Section Begin -->
+    <section class="latest spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Latest News</span>
+                        <h2>Fashion New Trends</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($posts as $data )
+                    
+                
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="{{ url('storage/'.$data->picture) }}"></div>
+                        <div class="blog__item__text">
+                            <span><img src="{{ url('img/icon/calendar.png') }}" alt=""> 16 February 2020</span>
+                            <h5>{{$data->post_title}}</h5>
+                            <a href="#">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                
+            </div>
+        </div>
+    </section>
+    <!-- Latest Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="#"><img src="{{ url('landing_page/img/footer-logo.png') }}" alt=""></a>
+                        </div>
+                        <p>The customer is at the heart of our unique business model, which includes design.</p>
+                        <a href="#"><img src="{{ url('img/payment.png') }}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Clothing Store</a></li>
+                            <li><a href="#">Trending Shoes</a></li>
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Sale</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Shopping</h6>
+                        <ul>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Payment Methods</a></li>
+                            <li><a href="#">Delivary</a></li>
+                            <li><a href="#">Return & Exchanges</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>NewLetter</h6>
+                        <div class="footer__newslatter">
+                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                            <form action="#">
+                                <input type="text" placeholder="Your email">
+                                <button type="submit"><span class="icon_mail_alt"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer__copyright__text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>Copyright ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>2020
+                            All rights reserved | This template is made with <i class="fa fa-heart-o"
+                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ url('landing_page/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url("landing_page/js/bootstrap.min.js") }}"></script>
+    <script src="{{ url('landing_page/js/jquery.nice-select.min.js') }}></script>
+    <script src="{{ url('landing_page/js/jquery.nice-select.min.js') }}></script>
+    <script src="{{ url('landing_page/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url('landing_page/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ url('landing_page/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ url('landing_page/js/mixitup.min.js') }}"></script>
+    <script src="{{ url('landing_page/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url('landing_page/js/main.js') }}"></script>
+</body>
+
+</html>

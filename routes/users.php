@@ -25,7 +25,7 @@ Route::group(['prefix' => '/users', 'middleware' => ['is.Admin','auth.access']],
 
 
 Route::middleware('auth.custom')->group(function () {
-  Route::get('/', [UserLoginController::class, 'index'])->name('user.login');
+  Route::get('/login', [UserLoginController::class, 'index'])->name('user.login');
   Route::post('/user-login', [UserLoginController::class, 'verifyUser'])->name('verify.user');
   Route::get('/user-signup', [UserSignUpController::class, 'index'])->name('user.signup');
   Route::post('/user-signup', [UserSignUpController::class, 'register'])->name('register.user');
