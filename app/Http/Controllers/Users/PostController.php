@@ -65,7 +65,10 @@ class PostController extends Controller
         if($search != ''){
             $posts = Post::where('post_title','LIKE',"%$search%")->get();
         }
-
+        // return response()->json([
+        //     'status'=>'success',
+        //     'search_data'=>$posts
+        // ]);
         return view('frontend.Users.feed', compact('posts'));
     }
 }

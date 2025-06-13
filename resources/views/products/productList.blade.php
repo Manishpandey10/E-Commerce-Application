@@ -32,27 +32,31 @@
                         @foreach ($productdata as $data)
                             <tr>
                                 <td>{{ $data->id }}</td>
-                                <td>{{ $data->productname }}
-                                    <div>
+                                <td>Name: {{ $data->productname }}
+                                    <br>
+                                    <div>Thumbnail:
                                         {{-- Thumbnail --}}
                                         <img src="{{ url('storage/' . $data->productthumbnail) }}" width="50px"
                                             height="50px" alt="Thumbnail">
                                     </div>
-                                    <div>
+                                    <br>
+                                    <div>Color:
                                         @if ($data->color->status == 0)
                                             <span class="text-danger">{{ $data->color->name }}</span>
                                         @else
                                             <span class="text-success">{{ $data->color->name }}</span>
                                         @endif
                                     </div>
-                                    <div>
+                                    <br>
+                                    <div>Theme: 
                                         @if ($data->theme->status == 0)
                                             <span class="text-danger">{{ $data->theme->name }}</span>
                                         @else
                                             <span class="text-success">{{ $data->theme->name }}</span>
                                         @endif
                                     </div>
-                                    <div>
+                                   
+                                    <div>Product Category :
                                         @if ($data->category->productStatus == 0)
                                             <span class="text-danger">{{ $data->category->categoryname }}</span>
                                         @else
