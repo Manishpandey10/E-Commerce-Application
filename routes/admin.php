@@ -6,6 +6,7 @@
     use App\Http\Controllers\Admin\LoginController;
     use App\Http\Controllers\Admin\ManageCategoryController;
     use App\Http\Controllers\Admin\ManageColorController;
+use App\Http\Controllers\Admin\ManageMessageController;
 use App\Http\Controllers\Admin\ManagePostsController;
 use App\Http\Controllers\Admin\ManageThemeController;
     use App\Http\Controllers\Admin\newCategoryController;
@@ -85,11 +86,15 @@ use App\Http\Controllers\Admin\ManageThemeController;
         Route::get('/manage-post',[ManagePostsController::class , 'index'])->name('manage.post');
         Route::get('/manage-post/delete/{id?}',[ManagePostsController::class , 'delete'])->name('delete.post');
         
+        Route::get('/manage-messages',[ManageMessageController::class, 'index'])->name('manage.message');
+        Route::get('/manage-messages/delete/{id}',[ManageMessageController::class, 'delete'])->name('delete.message');
+        
     });
-
+    
+    Route::post('/submit-messages',[ManageMessageController::class, 'submit'])->name('submit.message');
 
     Route::middleware('auth.adminDashboard')->group(function () {
-        Route::get('/admin', [LoginController::class, 'index'])->name('login'); //login page for admin
+        Route::get('/admin/login', [LoginController::class, 'index'])->name('login'); //login page for admin
         Route::post('/login', [LoginController::class, 'verifylogin'])->name('verifylogin'); //login check
         Route::post('/signup', [SignupController::class, 'registeruser'])->name('registerUser'); //registering the user to db
         Route::get('/signup', [SignupController::class, 'index'])->name('signup');

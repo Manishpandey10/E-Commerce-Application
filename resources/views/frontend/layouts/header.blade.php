@@ -129,6 +129,7 @@
                         </a>
 
                     </li>
+                   
                     <!-- Dashboards -->
 
                     <!-- Pages -->
@@ -265,6 +266,13 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                     <li class="menu-item {{ request()->routeIs('manage.message') ? 'active ' : '' }}">
+                        <a href="{{ route('manage.message') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                            <div class="text-truncate" data-i18n="Dashboards">Manage Messages</div>
+                        </a>
+
                     </li>
                     <!-- Form Validation -->
 

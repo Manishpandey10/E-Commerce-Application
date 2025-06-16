@@ -11,7 +11,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Demo: Login Basic - Pages | Sneat - Bootstrap Dashboard FREE</title>
+    <title>Admin Sign In</title>
 
     <meta name="description" content="" />
 
@@ -115,7 +115,7 @@
                       </svg>
                     </span>
                   </span>
-                  <span class="app-brand-text demo text-heading fw-bold">Sneat</span>
+                  <span class="app-brand-text demo text-heading fw-bold">Sign In</span>
                 </a>
               </div>
               <!-- /Logo -->
@@ -171,12 +171,12 @@
                 </div>
               </form>
 
-              <p class="text-center">
+              {{-- <p class="text-center">
                 <span>Not an user ?</span>
                 <a href="{{ route('user.signup') }}">
                   <span>Create an account</span>
                 </a>
-              </p>
+              </p> --}}
               
             </div>
           </div>

@@ -17,7 +17,7 @@ class CustomMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check()){
-            return redirect()->route('user.login')->with('Error','You need to login to access desired page');
+            return redirect()->route('login')->with('Error','You need to login to access desired page');
         
         }
         return $next($request);

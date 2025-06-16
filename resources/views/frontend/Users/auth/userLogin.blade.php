@@ -11,7 +11,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>user login </title>
+    <title>Admin Login </title>
 
     <meta name="description" content="" />
 
@@ -115,7 +115,7 @@
                       </svg>
                     </span>
                   </span>
-                  <span class="app-brand-text demo text-heading fw-bold">Sneat</span>
+                  <span class="app-brand-text demo text-heading fw-bold">Login</span>
                 </a>
               </div>
               <!-- /Logo -->
