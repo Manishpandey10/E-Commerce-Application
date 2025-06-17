@@ -48,47 +48,49 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script>
                 $(document).ready(function() {
-                            const deletedMsg = sessionStorage.getItem('colorDeleted');
+                    const deletedMsg = sessionStorage.getItem('messageDeleted');
 
-                            if (deletedMsg) {
-                                $("#alert_msg").html(
-                                    `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`
-                                  );
-                            }
-                            setTimeout(function() {
-                              $("#alert_msg").fadeOut();
-                            }, 2500);
+                    $("#alert_msg").html('');
+                    if (deletedMsg) {   
+                        $("#alert_msg").html(
+                            `<div class="alert alert-danger alert-dismissible" role="alert">${deletedMsg} </div>`
+                        );
+                    }
+                    setTimeout(function() {
+                        $("#alert_msg").fadeOut();
+                        sessionStorage.clear();
 
-                                //deleted functionality 
-                                $('.dlt-btn').on('click', function(e) {
-                                    e.preventDefault();
-                                    let productId = $(this).data('id');
-                                    console.log(productId);
+                    }, 2500);
+
+                    //deleted functionality 
+                    $('.dlt-btn').on('click', function(e) {
+                        e.preventDefault();
+                        let productId = $(this).data('id');
+                        console.log(productId);
 
 
-                                    if (confirm('are your sure you want to delete this product ?')) {
-                                        $.ajax({
-                                            url: '{{ url('admin/manage-messages/delete') }}/' + productId,
-                                            method: "GET",
-                                            success: function(res) {
-                                                if (res.status === 'success') {
-                                                    console.log(res);
-                                                    alert('Product has been deleted!!');
-                                                    sessionStorage.setItem('colorDeleted', res.messageDeleted);
-                                                    window.location.reload();
-                                                }
-                                            },
-                                            error: function(error) {
-                                                console.log(error);
-
-                                            }
-
-                                        });
+                        if (confirm('are your sure you want to delete this product ?')) {
+                            $.ajax({
+                                url: '{{ url('admin/manage-messages/delete') }}/' + productId,
+                                method: "GET",
+                                success: function(res) {
+                                    if (res.status === 'success') {
+                                        console.log(res);
+                                        alert('Product has been deleted!!');
+                                        sessionStorage.setItem('messageDeleted', res.messageDeleted);
+                                        window.location.reload();
                                     }
+                                },
+                                error: function(error) {
+                                    console.log(error);
 
-                                });
+                                }
+
                             });
-                          
+                        }
+
+                    });
+                });
             </script>
         @endpush
     @endsection
